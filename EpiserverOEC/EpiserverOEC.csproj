@@ -252,6 +252,7 @@
     <Content Include="Views\Shared\BigBanner.cshtml" />
     <Content Include="Views\Shared\PageHead.cshtml" />
     <Content Include="Views\SignupPage\Index.cshtml" />
+    <Content Include="Views\Shared\NavBar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

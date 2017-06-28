@@ -12,6 +12,9 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <a href="https://www.connection.se/"><img src="~/Models/Media/connection3.png" /></a>
+        @{ 
+            Html.RenderPartial("NavBar");
+        }
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,6 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                @*@Html.ContentLink(SiteDefinition.Current.StartPage)*@
                 @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
