@@ -1,0 +1,52 @@
+﻿body {
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    background-color: #f4f4f4;
+}
+
+h1, h2, h3, h4, h5, h6, .heading, nav.main, table thead th, nav.tabs, .btn, button, .link.text-uppercase a, nav.sub {
+    font-family: 'Hammersmith One', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+}
+
+.navbar {
+    background-color:rgba(27,27,27,0.85);
+    height:60px;
+}
+
+.render {
+    background-color:#f4f4f4;
+    /*margin-top:60px;*/
+}
+
+footer {
+    background-color: black;
+    color: #ffff4d;
+    height: 250px;
+    padding: 40px;
+}
+
+footer .heading {
+    font-size: 16px;
+}
+
+.icons{
+    padding-top: 15px;
+}
+
+.addresses{
+    color:white;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
