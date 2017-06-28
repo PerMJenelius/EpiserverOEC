@@ -4,9 +4,9 @@ using EpiserverOEC.Models.Pages;
 
 namespace EpiserverOEC.Controllers
 {
-    public class StartPageController : PageController<StartPage>
+    public class SignupPageController : PageController<SignupPage>
     {
-        public ActionResult Index(StartPage currentPage)
+        public ActionResult Index(SignupPage currentPage)
         {
             return View(currentPage);
         }

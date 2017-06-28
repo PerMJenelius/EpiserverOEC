@@ -19,8 +19,12 @@ h1, h2, h3, h4, h5, h6, .heading, nav.main, table thead th, nav.tabs, .btn, butt
     height:60px;
 }
 
+.pageHead {
+    margin-top: 260px;
+}
+
 .render {
-    background-color:#f4f4f4;
+    background-color: #f4f4f4;
     /*margin-top:60px;*/
 }
 
