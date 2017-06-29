@@ -1,9 +1,11 @@
 ﻿@model EpiserverOEC.Models.Blocks.BigBanner
 
-<img src="@Url.ContentUrl(Model.Image)" />
-
-<div style="background-image:@Url.ContentUrl(Model.Image)">
-    <h1 class="text-center">
+<div class="text-center" style="background-image: url('../../Models/Media/auktion_smaller.jpg'); color:white; background-size: 100%; background-repeat: no-repeat">
+    <h1 style="padding:260px 35% 0 35%; overflow: hidden; white-space: nowrap; line-height: 1;">
         @Html.PropertyFor(x => x.Heading)
     </h1>
+    <form action="~/en/signup/">
+        <input type="submit" value="Till anmälan" class="btn coolBtn" />
+    </form>
+    <img src="~/Models/Media/auktion_smaller.jpg" style="visibility: hidden;"/>
 </div>

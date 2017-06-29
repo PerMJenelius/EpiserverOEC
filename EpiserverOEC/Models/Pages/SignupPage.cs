@@ -5,7 +5,7 @@ using EPiServer.DataAnnotations;
 
 namespace EpiserverOEC.Models.Pages
 {
-    [ContentType(DisplayName = "SignupPage", GUID = "d04fa319-59c8-4429-884a-8ef8dda8c930", Description = "")]
+    [ContentType(DisplayName = "SignupPage", GUID = "d04fa319-59c8-4429-884a-8ef8dda8c930", Description = "Basically the StartPage again.")]
     public class SignupPage : SitePageData
     {
         [Display(

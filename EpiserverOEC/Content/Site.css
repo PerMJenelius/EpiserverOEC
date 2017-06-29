@@ -3,6 +3,10 @@
     font-weight: 400;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
+    background-color: rgba(0,0,0,1);
+}
+
+.body-content {
     background-color: #f4f4f4;
 }
 
@@ -14,12 +18,16 @@ h1, h2, h3, h4, h5, h6, .heading, nav.main, table thead th, nav.tabs, .btn, butt
     line-height: 1.2;
 }
 
-.navbar {
-    background-color:rgba(27,27,27,0.85);
-    height:60px;
+a {
+    color: rgba(208,69,49,1);
 }
 
-.pageHead{
+.navbar {
+    background-color: rgba(27,27,27,0.85);
+    height: 60px;
+}
+
+.pageHead {
     margin-top: 160px;
 }
 
@@ -31,20 +39,20 @@ h1, h2, h3, h4, h5, h6, .heading, nav.main, table thead th, nav.tabs, .btn, butt
 footer {
     background-color: black;
     color: #ffff4d;
-    height: 250px;
+    min-height: 250px;
     padding: 40px;
 }
 
-footer .heading {
-    font-size: 16px;
-}
+    footer .heading {
+        font-size: 16px;
+    }
 
-.icons{
+.icons {
     padding-top: 15px;
 }
 
-.addresses{
-    color:white;
+.addresses {
+    color: white;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -54,3 +62,15 @@ textarea {
     max-width: 280px;
 }
 
+.coolBtn {
+    border: 2px solid rgba(208,69,49,1);
+    border-radius: 0;
+    background-color: rgba(0,0,0,0);
+    height: 50px;
+    width: 140px;
+    margin: 20px
+}
+    .coolBtn:hover {
+        background-color: rgba(208,69,49,1);
+        color: rgba(255,255,255,1)
+    }

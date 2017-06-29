@@ -203,6 +203,9 @@
     </Compile>
     <Compile Include="Models\Blocks\BigBanner.cs" />
     <Compile Include="Models\Blocks\PageHead.cs" />
+    <Compile Include="Models\Blocks\PageHeadSmall.cs" />
+    <Compile Include="Models\Blocks\SignupLink.cs" />
+    <Compile Include="Models\Blocks\TopImage.cs" />
     <Compile Include="Models\Pages\SignupPage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
@@ -219,6 +222,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Models\Media\auktion_smaller.jpg" />
     <Content Include="Models\Media\connection3.png" />
     <Content Include="Models\Media\fb-art.png" />
     <Content Include="Models\Media\linkedin-512.png" />
@@ -252,7 +256,9 @@
     <Content Include="Views\Shared\BigBanner.cshtml" />
     <Content Include="Views\Shared\PageHead.cshtml" />
     <Content Include="Views\SignupPage\Index.cshtml" />
-    <Content Include="Views\Shared\NavBar.cshtml" />
+    <Content Include="Views\Shared\TopImage.cshtml" />
+    <Content Include="Views\Shared\PageHeadSmall.cshtml" />
+    <Content Include="Views\Shared\SignupLink.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

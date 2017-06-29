@@ -6,8 +6,8 @@ using EPiServer.DataAnnotations;
 
 namespace EpiserverOEC.Models.Blocks
 {
-    [ContentType(DisplayName = "PageHead", GUID = "aade4841-2431-4e51-b6ca-83c65e20dd5c", Description = "The information at the top of certain page types.")]
-    public class PageHead : BlockData
+    [ContentType(DisplayName = "PageHeadSmall", GUID = "d24ba996-b698-462b-9b24-dc9cc35ffaee", Description = "The information at the top of certain page types.")]
+    public class PageHeadSmall : BlockData
     {
         [CultureSpecific]
         [Display(

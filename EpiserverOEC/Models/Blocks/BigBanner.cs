@@ -6,7 +6,7 @@ using EPiServer.DataAnnotations;
 
 namespace EpiserverOEC.Models.Blocks
 {
-    [ContentType(DisplayName = "BigBanner", GUID = "adbf2aca-130d-464c-81c1-074c36575ede", Description = "")]
+    [ContentType(DisplayName = "BigBanner", GUID = "adbf2aca-130d-464c-81c1-074c36575ede", Description = "An image with text and a button on top of it.")]
     public class BigBanner : BlockData
     {
         [CultureSpecific]
