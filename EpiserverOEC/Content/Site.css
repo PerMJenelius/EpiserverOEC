@@ -70,7 +70,24 @@ textarea {
     width: 140px;
     margin: 20px
 }
+
     .coolBtn:hover {
         background-color: rgba(208,69,49,1);
         color: rgba(255,255,255,1)
+    }
+
+.awsBtn {
+    border: 2px solid rgba(208,69,49,1);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border-width: 0;
+    border-radius: 0;
+    height: 50px;
+    width: 140px;
+    margin: 20px
+}
+
+    .awsBtn:hover {
+        background-color: rgba(0,0,0,1);
+        color: white;
     }
