@@ -1,0 +1,200 @@
+﻿@model EpiserverOEC.Models.Blocks.SignupBlock
+
+<div class="container">
+    <!-- ROW -->
+    <div class="row addMoreForm1">
+        <div class="form-group col-md-4 col-xs-12">
+            <label for="Name" class="control-label">
+                Namn<em class="req">*</em>
+            </label>
+            @Html.TextBoxFor(x => Model.Name, new { @class = "form-control", @placeholder = "Fullständigt namn" })
+            @Html.ValidationMessageFor(x => Model.Name, "Skriv ett namn")
+        </div>
+        <div class="form-group col-md-3 col-xs-9">
+            <label for="Company" class="control-label">
+                Företag
+            </label>
+            @Html.TextBoxFor(x => Model.Company, new { @class = "form-control" })
+        </div>
+        <div class="form-group col-md-4 col-xs-12">
+            <label for="Email" class="control-label">
+                Epost<em class="req">*</em>
+            </label>
+            @Html.TextBoxFor(x => Model.Email, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" })
+            @Html.ValidationMessageFor(x => Model.Email, "Skriv en epostadress"))
+        </div>
+        <div>
+            <input type="button" class="btn coolBtn c1-bg c5-text" id="addButton" value="+" style="margin-top:27px; font-weight:bolder" />
+        </div>
+        <!-- /ROW -->
+        @*Generate nine hidden fieldsets*@
+        @for (int i = 0; i < 10; i++)
+        {
+            <div id="@(i+1)" hidden="hidden">
+                <div class="form-group col-md-4 col-xs-12">
+                    <label for="Name" class="control-label">
+                        Namn<em class="req">*</em>
+                    </label>
+
+                    @switch (i)
+                {
+                    case 0: @Html.TextBoxFor(x => Model.Name1, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                    case 1: @Html.TextBoxFor(x => Model.Name2, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                    case 2: @Html.TextBoxFor(x => Model.Name3, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                    case 3: @Html.TextBoxFor(x => Model.Name4, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                    case 4: @Html.TextBoxFor(x => Model.Name5, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                    case 5: @Html.TextBoxFor(x => Model.Name6, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                    case 6: @Html.TextBoxFor(x => Model.Name7, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                    case 7: @Html.TextBoxFor(x => Model.Name8, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                    case 8: @Html.TextBoxFor(x => Model.Name9, new { @class = "form-control", @placeholder = "Fullständigt namn" }); break;
+                }
+
+                </div>
+                <div class="form-group col-md-3 col-xs-9">
+                    <label for="Company" class="control-label">
+                        Företag
+                    </label>
+
+                    @switch (i)
+                {
+                    case 0: @Html.TextBoxFor(x => Model.Company1, new { @class = "form-control" }); break;
+                    case 1: @Html.TextBoxFor(x => Model.Company2, new { @class = "form-control" }); break;
+                    case 2: @Html.TextBoxFor(x => Model.Company3, new { @class = "form-control" }); break;
+                    case 3: @Html.TextBoxFor(x => Model.Company4, new { @class = "form-control" }); break;
+                    case 4: @Html.TextBoxFor(x => Model.Company5, new { @class = "form-control" }); break;
+                    case 5: @Html.TextBoxFor(x => Model.Company6, new { @class = "form-control" }); break;
+                    case 6: @Html.TextBoxFor(x => Model.Company7, new { @class = "form-control" }); break;
+                    case 7: @Html.TextBoxFor(x => Model.Company8, new { @class = "form-control" }); break;
+                    case 8: @Html.TextBoxFor(x => Model.Company9, new { @class = "form-control" }); break;
+                }
+
+                </div>
+
+                <div class="form-group col-md-4 col-xs-12">
+                    <label for="Email" class="control-label">
+                        Epost<em class="req">*</em>
+                    </label>
+
+                    @switch (i)
+                {
+                    case 0: @Html.TextBoxFor(x => Model.Email1, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                    case 1: @Html.TextBoxFor(x => Model.Email2, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                    case 2: @Html.TextBoxFor(x => Model.Email3, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                    case 3: @Html.TextBoxFor(x => Model.Email4, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                    case 4: @Html.TextBoxFor(x => Model.Email5, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                    case 5: @Html.TextBoxFor(x => Model.Email6, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                    case 6: @Html.TextBoxFor(x => Model.Email7, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                    case 7: @Html.TextBoxFor(x => Model.Email8, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                    case 8: @Html.TextBoxFor(x => Model.Email9, new { autocapitalize = "off", @class = "form-control", @placeholder = "exempel@domain.se" }); break;
+                }
+
+                </div>
+                <div>
+                    <input type="button" class="btn coolBtn c1-bg c5-text minus" id="minus @(i+1)" value="-" style="margin-top:45px; font-weight:bolder" />
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <div class="form-group">
+        <label for="Message" class="control-label">
+            Meddelande
+        </label>
+        @Html.TextAreaFor(model => model.Message, new { rows = 5, @class = "form-control" })
+        <p><span class="requiredCF">*</span> Obligatoriska fält</p>
+    </div>
+
+    <script type="text/javascript">
+
+                    $(document).ready(function () {
+                        var counter = 0;
+                        var newId = 1;
+                        var visibleFields = 1;
+
+                        //show hidden fields when '+' button is clicked
+                        $('#addButton').click(function () {
+
+                            alert("I am an alert box!");
+
+                            if (visibleFields < 10) {
+                                var showField = 0;
+
+                                if ($('#1').is(':hidden')) {
+                                    $('#1').fadeIn(1000);
+                                    @Model.IsActive1 = true;
+                                }
+                                else if ($('#2').is(':hidden')) {
+                                    $('#2').fadeIn(1000);
+                                    @Model.IsActive2 = true;
+                                }
+                                else if ($('#3').is(':hidden')) {
+                                    $('#3').fadeIn(1000);
+                                    @Model.IsActive3 = true;
+                                }
+                                else if ($('#4').is(':hidden')) {
+                                    $('#4').fadeIn(1000);
+                                    @Model.IsActive4 = true;
+                                }
+                                else if ($('#5').is(':hidden')) {
+                                    $('#5').fadeIn(1000);
+                                    @Model.IsActive5 = true;
+                                }
+                                else if ($('#6').is(':hidden')) {
+                                    $('#6').fadeIn(1000);
+                                    @Model.IsActive6 = true;
+                                }
+                                else if ($('#7').is(':hidden')) {
+                                    $('#7').fadeIn(1000);
+                                    @Model.IsActive7 = true;
+                                }
+                                else if ($('#8').is(':hidden')) {
+                                    $('#8').fadeIn(1000);
+                                    @Model.IsActive8 = true;
+                                }
+                                else if ($('#9').is(':hidden')) {
+                                    $('#9').fadeIn(1000);
+                                    @Model.IsActive9 = true;
+                                }
+
+                                ++visibleFields;
+                            }
+
+                        });
+
+                        //hide fields when '-' button is clicked
+                        $('.minus').click(function () {
+
+                            switch (this.id) {
+                                case 'minus 1': $('#1').fadeOut(500); @Model.IsActive1 = false; break;
+                                case 'minus 2': $('#2').fadeOut(500); @Model.IsActive2 = false; break;
+                                case 'minus 3': $('#3').fadeOut(500); @Model.IsActive3 = false; break;
+                                case 'minus 4': $('#4').fadeOut(500); @Model.IsActive4 = false; break;
+                                case 'minus 5': $('#5').fadeOut(500); @Model.IsActive5 = false; break;
+                                case 'minus 6': $('#6').fadeOut(500); @Model.IsActive6 = false; break;
+                                case 'minus 7': $('#7').fadeOut(500); @Model.IsActive7 = false; break;
+                                case 'minus 8': $('#8').fadeOut(500); @Model.IsActive8 = false; break;
+                                case 'minus 9': $('#9').fadeOut(500); @Model.IsActive9 = false; break;
+                            }
+
+                            if (visibleFields > 1) {
+                                --visibleFields;
+                            }
+
+                        });
+                    });
+    </script>
+
+    <fieldset class="buttons">
+        <button class="btn coolBtn c1-bg c5-text" type="submit">
+            <span>Anmäl</span>
+        </button>
+    </fieldset>
+
+    <div class="ajax-loading" id="placeholder" style="display:none">
+        <div class="loading">
+            <span class="message">Ett meddelande har skickats bla bla</span>
+        </div>
+    </div>
+</div>
+
