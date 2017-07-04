@@ -61,7 +61,7 @@ namespace OEC_webb.Models
                     connection.Open();
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
-                    command.CommandText = $"select * from BidsPerItem where itemID = {id}";
+                    command.CommandText = $"select * from BidsPerItemEpi where itemID = {id}";
                     SqlDataReader dr = command.ExecuteReader();
 
                     while (dr.Read())
@@ -158,7 +158,7 @@ namespace OEC_webb.Models
 
                         SqlCommand command = new SqlCommand();
                         command.Connection = connection;
-                        command.CommandText = $"insert into BidsPerItem (ItemID, BidderName, BidAmount, BidTime) values ('{itemId}', '{newBidder}', '{bidAmount}', '{bidTime}')";
+                        command.CommandText = $"insert into BidsPerItemEpi (ItemID, BidderName, BidAmount, BidTime) values ('{itemId}', '{newBidder}', '{bidAmount}', '{bidTime}')";
 
                         int nrRows = command.ExecuteNonQuery();
 
@@ -194,7 +194,7 @@ namespace OEC_webb.Models
                     connection.Open();
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
-                    command.CommandText = $"select * from BidsPerItem where ItemID = {id} and BidAmount= {amount}";
+                    command.CommandText = $"select * from BidsPerItemEpi where ItemID = {id} and BidAmount= {amount}";
                     SqlDataReader dr = command.ExecuteReader();
 
                     while (dr.Read())
@@ -221,7 +221,7 @@ namespace OEC_webb.Models
                         connection.Open();
                         SqlCommand command = new SqlCommand();
                         command.Connection = connection;
-                        command.CommandText = $"delete from BidsPerItem where ItemID = {id} and BidAmount = {amount}";
+                        command.CommandText = $"delete from BidsPerItemEpi where ItemID = {id} and BidAmount = {amount}";
                         int nrRows = command.ExecuteNonQuery();
 
                         if (nrRows > 0)
