@@ -2,7 +2,6 @@
 @using EPiServer.Core;
 @using EPiServer.ServiceLocation;
 @using OEC_webb.Models;
-@using EpiserverOEC.Models;
 
 @model EpiserverOEC.Models.Blocks.AuctionPodSection
 
@@ -10,8 +9,8 @@
     var pageRouteHelper = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<EPiServer.Web.Routing.IPageRouteHelper>();
     var children = DataFactory.Instance.GetDescendents(pageRouteHelper.PageLink);
 
-    List<PersPageData> bigPages = new List<PersPageData>();
-    List<PersPageData> smallPages = new List<PersPageData>();
+    List<PageData> bigPages = new List<PageData>();
+    List<PageData> smallPages = new List<PageData>();
 
     <div class="container" style="padding-bottom:30px">
 
@@ -19,18 +18,9 @@
         {
             var pageRef = new PageReference(child.ID);
             var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
-            var rawPage = contentRepository.Get<PageData>(pageRef);
+            var page = contentRepository.Get<PageData>(pageRef);
 
-            PersPageData page = new PersPageData();
-            page.ID = child.ID;
-            page.Heading = rawPage.GetPropertyValue("Heading");
-            page.BodyText = rawPage.GetPropertyValue<XhtmlString>("BodyText");
-            page.Image = rawPage.GetPropertyValue<ContentReference>("Image");
-            page.Large = rawPage.GetPropertyValue<Boolean>("Large");
-            page.StartingBid = rawPage.GetPropertyValue<int>("StartingBid");
-            page.LinkURL = rawPage.GetPropertyValue("LinkURL");
-
-            if (page.Large)
+            if (page.GetPropertyValue<Boolean>("Large"))
             {
                 bigPages.Add(page);
             }
@@ -45,32 +35,32 @@
             <div class="item col-md-4 col-sm-6 col-xs-12 text-center os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.1s" style="margin-bottom:10px">
                 <div class="inner" style="background-color: white; min-height: 600px">
 
-                    @if (page.Image != null)
+                    @if (page.GetPropertyValue<ContentReference>("Image") != null)
                     {
                         <a href="@page.LinkURL">
-                            <img src="@Url.ContentUrl(page.Image)" style="width:100%; min-height:320px" />
+                            <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:320px" />
                         </a>
                     }
 
-                    @if (page.Heading != null)
+                    @if (page.GetPropertyValue("Heading") != null)
                     {
-                        if (page.Heading.Length <= 12)
+                        if (page.GetPropertyValue("Heading").Length <= 12)
                         {
-                            <h2>@page.Heading</h2>
+                            <h2>@page.GetPropertyValue("Heading")</h2>
                         }
-                        else if (page.Heading.Length <= 18)
+                        else if (page.GetPropertyValue("Heading").Length <= 18)
                         {
-                            <h4>@page.Heading</h4>
+                            <h4>@page.GetPropertyValue("Heading")</h4>
                         }
                         else
                         {
-                            <h6>@page.Heading</h6>
+                            <h6>@page.GetPropertyValue("Heading")</h6>
                         }
                     }
 
-                    @if (page.BodyText != null)
+                    @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
                     {
-                        string description = page.BodyText.ToString();
+                        string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
 
                         if (description.Length > 120)
                         {
@@ -94,11 +84,11 @@
                         int bid = 0;
                         string bidString = "Startbud";
 
-                        var bidHistory = SQLQuery.GetBidHistory(page.ID);
+                        var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
 
-                        if (bidHistory.HighestBid < page.StartingBid)
+                        if (bidHistory.HighestBid < page.GetPropertyValue<int>("StartingBid"))
                         {
-                            bid = page.StartingBid;
+                            bid = page.GetPropertyValue<int>("StartingBid");
                         }
                         else
                         {
@@ -119,27 +109,35 @@
             <div class="item col-md-2 col-sm-3 col-xs-6 text-center os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.1s" style="margin-bottom:10px">
                 <div class="inner" style="background-color:white; min-height: 290px">
 
-                    @if (page.Image != null)
+                    @if (page.GetPropertyValue<ContentReference>("Image") != null)
                     {
                         <a href="@page.LinkURL">
-                            <img src="@Url.ContentUrl(page.Image)" style="width:100%; min-height:160px" />
+                            <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:160px" />
                         </a>
                     }
 
-                    @if (page.Heading != null)
+                    @if (page.GetPropertyValue("Heading") != null)
                     {
-                        <h4 style="padding: 8px 0">@page.Heading.ToUpper()</h4>
+                        <h4 style="padding: 8px 0">@page.GetPropertyValue("Heading").ToUpper()</h4>
                     }
 
                     @{
                         int bid = 0;
+                        string bidString = "Startbud";
 
-                        if (page.StartingBid != 0)
+                        var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
+
+                        if (bidHistory.HighestBid < page.GetPropertyValue<int>("StartingBid"))
                         {
-                            bid = Convert.ToInt32(page.StartingBid);
+                            bid = page.GetPropertyValue<int>("StartingBid");
+                        }
+                        else
+                        {
+                            bid = bidHistory.HighestBid;
+                            bidString = "Senaste bud";
                         }
 
-                        <h4 style="color:firebrick">Startbud</h4>
+                        <h4 style="color:firebrick">@bidString</h4>
                         <h4 style="color:firebrick">@bid KR</h4>
                     }
 

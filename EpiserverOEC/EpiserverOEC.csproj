@@ -221,7 +221,6 @@
     <Compile Include="Models\Pages\AuctionItemPage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
-    <Compile Include="Models\PersPageData.cs" />
     <Compile Include="Models\SiteTypeManager.cs" />
     <Compile Include="Models\SQLQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
