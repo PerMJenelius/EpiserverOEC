@@ -1,0 +1,43 @@
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+
+@model EpiserverOEC.Models.Blocks.SponsorsBig
+
+@{
+    var pageRouteHelper = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<EPiServer.Web.Routing.IPageRouteHelper>();
+    var children = DataFactory.Instance.GetDescendents(pageRouteHelper.PageLink);
+
+    List<PageData> pages = new List<PageData>();
+
+    foreach (var child in children)
+    {
+        var pageRef = new PageReference(child.ID);
+        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+        var page = contentRepository.Get<PageData>(pageRef);
+        pages.Add(page);
+    }
+}
+
+<div class="container" style="padding-bottom:30px">
+
+    @foreach (var page in pages)
+    {
+        <div class="item col-md-6 col-sm-9 col-xs-18 text-center os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.1s" style="height:250px; margin-bottom:30px">
+            @Html.Raw("<a href=\"" + "http://" + page.GetPropertyValue("Link") + "\" >")
+                <div class="inner" style="background-image:url(@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))); background-size: 100% 100%; height:250px; padding: 60px 30px">
+                    <div style="background-color:rgba(255,255,255,0.8); margin: 0 30px">
+                        <h2>
+                            @page.GetPropertyValue("Heading")
+                        </h2>
+                        <p>
+                            @Html.Raw(page.GetPropertyValue("BodyText"))
+                        </p>
+                    </div>
+                </div>
+            @Html.Raw("</a>")
+        </div>
+    }
+
+</div>
+

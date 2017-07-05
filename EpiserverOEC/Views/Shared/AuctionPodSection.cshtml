@@ -12,97 +12,101 @@
     List<PageData> bigPages = new List<PageData>();
     List<PageData> smallPages = new List<PageData>();
 
-    <div class="container" style="padding-bottom:30px">
+    foreach (var child in children)
+    {
+        var pageRef = new PageReference(child.ID);
+        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+        var page = contentRepository.Get<PageData>(pageRef);
 
-        @foreach (var child in children)
+        if (page.GetPropertyValue<Boolean>("Large"))
         {
-            var pageRef = new PageReference(child.ID);
-            var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
-            var page = contentRepository.Get<PageData>(pageRef);
-
-            if (page.GetPropertyValue<Boolean>("Large"))
-            {
-                bigPages.Add(page);
-            }
-            else
-            {
-                smallPages.Add(page);
-            }
+            bigPages.Add(page);
         }
+        else
+        {
+            smallPages.Add(page);
+        }
+    }
+
+    <div class="container" style="padding-bottom:30px">
 
         @foreach (var page in bigPages)
         {
             <div class="item col-md-4 col-sm-6 col-xs-12 text-center os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.1s" style="margin-bottom:10px">
                 <div class="inner" style="background-color: white; min-height: 600px">
 
-                    @if (page.GetPropertyValue<ContentReference>("Image") != null)
-                    {
-                        <a href="@page.LinkURL">
+                    <a href="@page.LinkURL">
+
+                        @if (page.GetPropertyValue<ContentReference>("Image") != null)
+                        {
+
                             <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:320px" />
-                        </a>
-                    }
 
-                    @if (page.GetPropertyValue("Heading") != null)
-                    {
-                        if (page.GetPropertyValue("Heading").Length <= 12)
-                        {
-                            <h2>@page.GetPropertyValue("Heading")</h2>
                         }
-                        else if (page.GetPropertyValue("Heading").Length <= 18)
-                        {
-                            <h4>@page.GetPropertyValue("Heading")</h4>
-                        }
-                        else
-                        {
-                            <h6>@page.GetPropertyValue("Heading")</h6>
-                        }
-                    }
 
-                    @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
-                    {
-                        string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
-
-                        if (description.Length > 120)
+                        @if (page.GetPropertyValue("Heading") != null)
                         {
-                            description = description.Remove(120);
-
-                            while (!description.EndsWith(" "))
+                            if (page.GetPropertyValue("Heading").Length <= 12)
                             {
+                                <h2>@page.GetPropertyValue("Heading")</h2>
+                            }
+                            else if (page.GetPropertyValue("Heading").Length <= 18)
+                            {
+                                <h4>@page.GetPropertyValue("Heading")</h4>
+                            }
+                            else
+                            {
+                                <h6>@page.GetPropertyValue("Heading")</h6>
+                            }
+                        }
+
+                        @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
+                        {
+                            string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
+
+                            if (description.Length > 120)
+                            {
+                                description = description.Remove(120);
+
+                                while (!description.EndsWith(" "))
+                                {
+                                    description = description.Remove(description.Length - 1, 1);
+                                }
+
                                 description = description.Remove(description.Length - 1, 1);
+                                description += "...";
                             }
 
-                            description = description.Remove(description.Length - 1, 1);
-                            description += "...";
+                            <div class="text" style="padding:10px; color:dimgray; height: 54px">@Html.Raw(description)</div>
                         }
 
-                        <div class="text" style="padding:10px; color:dimgray; height: 54px">@Html.Raw(description)</div>
-                    }
+                        <hr />
 
-                    <hr />
+                        @{
+                            int bid = 0;
+                            string bidString = "Startbud";
 
-                    @{
-                        int bid = 0;
-                        string bidString = "Startbud";
+                            var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
 
-                        var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
+                            if (bidHistory.HighestBid < page.GetPropertyValue<int>("StartingBid"))
+                            {
+                                bid = page.GetPropertyValue<int>("StartingBid");
+                            }
+                            else
+                            {
+                                bid = bidHistory.HighestBid;
+                                bidString = "Senaste bud";
+                            }
 
-                        if (bidHistory.HighestBid < page.GetPropertyValue<int>("StartingBid"))
-                        {
-                            bid = page.GetPropertyValue<int>("StartingBid");
+                            <h3 style="color:firebrick">@bidString</h3>
+                            <h3 style="color:firebrick">@bid kr</h3>
                         }
-                        else
-                        {
-                            bid = bidHistory.HighestBid;
-                            bidString = "Senaste bud";
-                        }
 
-                        <h3 style="color:firebrick">@bidString</h3>
-                        <h3 style="color:firebrick">@bid kr</h3>
-                    }
+                    </a>
 
                 </div>
             </div>
-                        }
+                            }
 
         @foreach (var page in smallPages)
         {

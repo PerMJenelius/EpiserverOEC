@@ -199,6 +199,7 @@
     <Compile Include="Business\Initialization\DisplayRegistryInitialization.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\Page\AuctionItemPageController.cs" />
+    <Compile Include="Controllers\Page\SponsorItemPageController.cs" />
     <Compile Include="Controllers\Page\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -214,12 +215,14 @@
     <Compile Include="Models\Blocks\PageHeadSmall.cs" />
     <Compile Include="Models\Blocks\SignupBlock.cs" />
     <Compile Include="Models\Blocks\SignupLink.cs" />
+    <Compile Include="Models\Blocks\SponsorsBig.cs" />
     <Compile Include="Models\Blocks\TopImage.cs" />
     <Compile Include="Models\CustomContactVM.cs" />
     <Compile Include="Models\ExtensionMethods.cs" />
     <Compile Include="Models\Imaging.cs" />
     <Compile Include="Models\Pages\AuctionItemPage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
+    <Compile Include="Models\Pages\SponsorItemPage.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
     <Compile Include="Models\SiteTypeManager.cs" />
     <Compile Include="Models\SQLQuery.cs" />
@@ -278,6 +281,8 @@
     <Content Include="Views\Shared\AuctionPod.cshtml" />
     <Content Include="Views\Shared\AuctionPodSection.cshtml" />
     <Content Include="Views\AuctionItemPage\Index.cshtml" />
+    <Content Include="Views\Shared\SponsorsBig.cshtml" />
+    <Content Include="Views\SponsorItemPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

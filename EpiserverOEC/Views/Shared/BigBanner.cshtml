@@ -1,6 +1,10 @@
-﻿@model EpiserverOEC.Models.Blocks.BigBanner
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
 
-<div class="text-center" style="background-image: url('../../Models/Media/auktion_smaller.jpg'); background-color:black; color:white; background-size: 100%; background-repeat: no-repeat; padding:14% 0 10% 0">
+@model EpiserverOEC.Models.Blocks.BigBanner
+
+<div class="text-center" style="background-image: url(@Url.ContentUrl(Model.Image)); background-color:black; color:white; background-size: 100%; background-repeat: no-repeat; padding:14% 0 10% 0">
     <h1 style="margin-top:0px; padding: 5px 10px 0 10px; background-color:rgba(0,0,0,0.5); display:inline">
         @Html.PropertyFor(x => x.Heading)
     </h1>

@@ -10,5 +10,12 @@ namespace EpiserverOEC.Controllers.Page
         {
             return View(currentPage);
         }
+
+        [HttpPost]
+        public ActionResult PostBid(AuctionItemPage bid)
+        {
+            //return JavaScript("alert('controller get!')");
+            return View("Index", bid);
+        }
     }
 }

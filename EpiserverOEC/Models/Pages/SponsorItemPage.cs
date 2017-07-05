@@ -8,8 +8,8 @@ using EPiServer.Web;
 
 namespace EpiserverOEC.Models.Pages
 {
-    [ContentType(DisplayName = "AuctionItemPage", GUID = "c47ab934-48e4-44e1-991c-0c0881fc7940", Description = "")]
-    public class AuctionItemPage : PageData
+    [ContentType(DisplayName = "SponsorItemPage", GUID = "0f487412-7c94-4c59-8624-6fa411dc0024", Description = "")]
+    public class SponsorItemPage : SitePageData
     {
         [CultureSpecific]
         [Display(
@@ -28,6 +28,7 @@ namespace EpiserverOEC.Models.Pages
         public virtual XhtmlString BodyText { get; set; }
 
         [CultureSpecific]
+
         [Display(
             Name = "Image",
             Description = "Add an image of the item.",
@@ -37,26 +38,10 @@ namespace EpiserverOEC.Models.Pages
 
         [CultureSpecific]
         [Display(
-            Name = "Starting Bid",
-            Description = "Add a starting bid.",
+            Name = "Link",
+            Description = "Add a link to the sponsor's web/social media site.",
             GroupName = SystemTabNames.Content,
-            Order = 4)]
-        public virtual int StartingBid { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Large Size",
-            Description = "Set to true if the item is to be displayed as Large on the Auction Main Page.",
-            GroupName = SystemTabNames.Content,
-            Order = 5)]
-        public virtual bool Large { get; set; }
-
-        public virtual string NewBidder { get; set; }
-
-        public virtual int BidAmount { get; set; }
-
-        public virtual int ItemId { get; set; }
-
-        public virtual int LowestBid { get; set; }
+            Order = 1)]
+        public virtual String Link { get; set; }
     }
 }

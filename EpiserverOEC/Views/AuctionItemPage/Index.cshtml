@@ -33,6 +33,7 @@
             @{
                 int bid = 0;
                 int lowestBid = 0;
+                int maxBid = 0;
                 string bidString = "Startbud";
 
                 int id = Convert.ToInt32(Model.PageLink.ToString());
@@ -41,6 +42,7 @@
                 if (bidHistory.HighestBid < Model.StartingBid)
                 {
                     bid = Model.StartingBid;
+                    lowestBid = bid;
                 }
                 else
                 {
@@ -48,6 +50,8 @@
                     lowestBid = Convert.ToInt32(Math.Ceiling(bid * 1.03));
                     bidString = "Senaste bud";
                 }
+
+                maxBid = 10 * lowestBid;
             }
 
             <h3 style="color:firebrick">
@@ -61,10 +65,21 @@
                 </p>
             }
 
-            <div style="background-color:white; border: 1px solid black; padding:10px">
-                <h4>Namn: <input type="text" /></h4>
-                <h4>Bud: <input type="number" min = @lowestBid Value = @lowestBid max = 10000 /> kr <input type="button" value="LÄGG BUD" class="btn" style="border-radius:0; background-color:orangered; color:white" /></h4>
-            </div>
+            @using (Html.BeginForm("PostBid", "AuctionItemPage", Model, FormMethod.Post))
+            {
+                <div style="background-color:white; border: 1px solid black; padding:10px 15px; width: 360px">
+                    <h4>
+                        <label style="width:75px">Namn: </label>
+                        @Html.TextBoxFor(m => m.NewBidder, new { @style = "height:30px; width:243px" })
+                    </h4>
+                    <h4>
+                        <label style="width:75px">Bud: </label>
+                        @Html.TextBoxFor(m => m.BidAmount, new { type = "number", min = @lowestBid, max = @maxBid, Value = @lowestBid, style = "height:30px; width:102px" })
+                        kr
+                        <input type="submit" value="LÄGG BUD" class="btn" style="border-radius:0; background-color:orangered; color:white" />
+                    </h4>
+                </div>
+            }
 
             <h4><a class="row" href="~/en/auction/" style="color:firebrick">Till alla auktioner</a></h4>
         </div>
