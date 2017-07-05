@@ -216,6 +216,7 @@
     <Compile Include="Models\Blocks\SignupBlock.cs" />
     <Compile Include="Models\Blocks\SignupLink.cs" />
     <Compile Include="Models\Blocks\SponsorsBig.cs" />
+    <Compile Include="Models\Blocks\SponsorStrip.cs" />
     <Compile Include="Models\Blocks\TopImage.cs" />
     <Compile Include="Models\CustomContactVM.cs" />
     <Compile Include="Models\ExtensionMethods.cs" />
@@ -283,6 +284,7 @@
     <Content Include="Views\AuctionItemPage\Index.cshtml" />
     <Content Include="Views\Shared\SponsorsBig.cshtml" />
     <Content Include="Views\SponsorItemPage\Index.cshtml" />
+    <Content Include="Views\Shared\SponsorStrip.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,43 @@
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+@using EpiserverOEC.Models.Pages;
+
+    @model EpiserverOEC.Models.Blocks.SponsorStrip
+
+    @{
+        var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
+
+        List<PageData> pages = new List<PageData>();
+
+        foreach (var child in children)
+        {
+            var pageRef = new PageReference(child.ID);
+            var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+            var page = contentRepository.Get<PageData>(pageRef);
+
+            if (page.GetPropertyValue("Link") != null)
+            {
+                pages.Add(page);
+            }
+        }
+    }
+
+    <div class="container text-center" style="padding: 50px 0 30px 0">
+        <div class="item col-md-6 col-sm-9 col-xs-18" style="padding:0 50px">
+            <h1>
+                @Html.PropertyFor(x => x.Heading)
+            </h1>
+            <div>
+                @Html.PropertyFor(x => x.BodyText)
+            </div>
+        </div>
+        <div class="item col-md-6 col-sm-9 col-xs-18" style="background-color:maroon; padding:0">
+
+            @foreach (var page in pages)
+            {
+                <div class="item col-md-6 col-sm-9 col-xs-18" style="background-image:url(@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))); height: 100px; padding:10px"></div>
+            }
+
+        </div>
+    </div>

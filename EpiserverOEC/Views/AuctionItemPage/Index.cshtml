@@ -36,7 +36,8 @@
                 int maxBid = 0;
                 string bidString = "Startbud";
 
-                int id = Convert.ToInt32(Model.PageLink.ToString());
+                string idStr = Model.PageLink.ToString();
+                int id = Convert.ToInt32(idStr);
                 BidHistory bidHistory = SQLQuery.GetBidHistory(id);
 
                 if (bidHistory.HighestBid < Model.StartingBid)
