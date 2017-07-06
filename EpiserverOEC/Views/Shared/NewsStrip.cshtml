@@ -1,12 +1,84 @@
-﻿@model EpiserverOEC.Models.Blocks.NewsStrip
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+
+@model EpiserverOEC.Models.Blocks.NewsStrip
+
+@{
+    var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
+
+    List<PageData> randomPages = new List<PageData>();
+
+    foreach (var child in children)
+    {
+        var pageRef = new PageReference(child.ID);
+        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+        var page = contentRepository.Get<PageData>(pageRef);
+
+        if (page.PageTypeName == "NewsItemPage" && page.GetPropertyValue("Image") != null)
+        {
+            randomPages.Add(page);
+        }
+    }
+
+    var pages = randomPages
+        .OrderByDescending(p => p.Created)
+        .Take(3);
+}
 
 <div class="container text-center" style="padding: 50px 0">
+
     <h1>
         @Html.PropertyFor(x => x.Heading)
     </h1>
     <div>
         @Html.PropertyFor(x => x.BodyText)
     </div>
+
+
+
+    @foreach (var page in pages)
+    {
+        <div class="item col-md-4 col-sm-6 col-xs-12 text-center">
+            <div class="inner" style="background-color: white; min-height: 500px">
+
+                <a href="@page.LinkURL">
+
+                    @if (page.GetPropertyValue<ContentReference>("Image") != null)
+                    {
+                        <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; height:300px" />
+                    }
+
+                    @if (page.GetPropertyValue("Heading") != null)
+                    {
+                        <h2>@page.GetPropertyValue("Heading")</h2>
+                    }
+
+                    @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
+                    {
+                        string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
+
+                        if (description.Length > 120)
+                        {
+                            description = description.Remove(120);
+
+                            while (!description.EndsWith(" "))
+                            {
+                                description = description.Remove(description.Length - 1, 1);
+                            }
+
+                            description = description.Remove(description.Length - 1, 1);
+                            description += "...";
+                        }
+
+                        <div class="text" style="padding:10px 20px; color:dimgray; height: 54px">@Html.Raw(description)</div>
+                    }
+
+                </a>
+            </div>
+        </div>
+    }
 </div>
 
 <div style="height:2px; background-color:white"></div>
+

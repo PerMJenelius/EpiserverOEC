@@ -233,7 +233,6 @@
     <Compile Include="Models\Pages\StartPage.cs" />
     <Compile Include="Models\SiteTypeManager.cs" />
     <Compile Include="Models\SQLQuery.cs" />
-    <Compile Include="Models\YearMonth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

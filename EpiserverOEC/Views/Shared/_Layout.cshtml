@@ -11,25 +11,23 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="https://www.connection.se/"><img src="~/Models/Media/connection3.png" /></a>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    @Html.ActionLink("Hem", "Index", "en/start", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Om OEC", "Index", "en/about", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Sponsorer", "Index", "en/sponsors", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Auktionen", "Index", "en/auction", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Anmälan", "Index", "en/signup", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Nyheter", "Index", "en/news", new { area = "" }, new { @class = "navbar-brand" })
-                </ul>
-            </div>
+        <div class="navbar-header">
+            <a href="https://www.connection.se/"><img src="~/Models/Media/connection3.png" /></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                @Html.ActionLink("Hem", "Index", "en/start", new { area = "" }, new { @class = "navbar-brand heading" })
+                @Html.ActionLink("Om OEC", "Index", "en/about", new { area = "" }, new { @class = "navbar-brand heading" })
+                @Html.ActionLink("Sponsorer", "Index", "en/sponsors", new { area = "" }, new { @class = "navbar-brand heading" })
+                @Html.ActionLink("Auktionen", "Index", "en/auction", new { area = "" }, new { @class = "navbar-brand heading" })
+                @Html.ActionLink("Anmälan", "Index", "en/signup", new { area = "" }, new { @class = "navbar-brand heading" })
+                @Html.ActionLink("Nyheter", "Index", "en/news", new { area = "" }, new { @class = "navbar-brand heading" })
+            </ul>
         </div>
     </div>
     <div>
