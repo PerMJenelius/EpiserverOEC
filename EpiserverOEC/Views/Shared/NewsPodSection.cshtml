@@ -1,6 +1,7 @@
 ﻿@using EPiServer;
 @using EPiServer.Core;
 @using EPiServer.ServiceLocation;
+@using EpiserverOEC.Models;
 
 @model EpiserverOEC.Models.Blocks.NewsPodSection
 
@@ -132,6 +133,43 @@
                             @year
                         </h5>
                     </div>
+
+                    var months = new List<int>();
+
+                    foreach (var page in pages)
+                    {
+                        if (page.Created.Year == year && !months.Contains(page.Created.Month))
+                        {
+                            months.Add(page.Created.Month);
+                        }
+                    }
+
+                    foreach (var month in months)
+                    {
+                        string monthStr = string.Empty;
+
+                        switch (month)
+                        {
+                            case 1: monthStr = "Januari"; break;
+                            case 2: monthStr = "Februari"; break;
+                            case 3: monthStr = "Mars"; break;
+                            case 4: monthStr = "April"; break;
+                            case 5: monthStr = "Maj"; break;
+                            case 6: monthStr = "Juni"; break;
+                            case 7: monthStr = "Juli"; break;
+                            case 8: monthStr = "Augusti"; break;
+                            case 9: monthStr = "September"; break;
+                            case 10: monthStr = "Oktober"; break;
+                            case 11: monthStr = "November"; break;
+                            case 12: monthStr = "December"; break;
+                        }
+
+                        <div style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                            <h5>
+                                - @monthStr
+                            </h5>
+                        </div>
+                    }
                 }
 
             </div>
