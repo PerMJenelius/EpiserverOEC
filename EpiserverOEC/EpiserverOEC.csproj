@@ -210,7 +210,9 @@
     <Compile Include="Models\Blocks\AuctionItem.cs" />
     <Compile Include="Models\Blocks\AuctionPod.cs" />
     <Compile Include="Models\Blocks\AuctionPodSection.cs" />
+    <Compile Include="Models\Blocks\AuctionStrip.cs" />
     <Compile Include="Models\Blocks\BigBanner.cs" />
+    <Compile Include="Models\Blocks\InfoStrip.cs" />
     <Compile Include="Models\Blocks\PageHead.cs" />
     <Compile Include="Models\Blocks\PageHeadSmall.cs" />
     <Compile Include="Models\Blocks\SignupBlock.cs" />
@@ -285,6 +287,8 @@
     <Content Include="Views\Shared\SponsorsBig.cshtml" />
     <Content Include="Views\SponsorItemPage\Index.cshtml" />
     <Content Include="Views\Shared\SponsorStrip.cshtml" />
+    <Content Include="Views\Shared\AuctionStrip.cshtml" />
+    <Content Include="Views\Shared\InfoStrip.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

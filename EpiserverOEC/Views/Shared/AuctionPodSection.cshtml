@@ -28,9 +28,12 @@
         }
     }
 
+    var bPages = bigPages.OrderByDescending(p => p.Created);
+    var sPages = smallPages.OrderByDescending(p => p.Created);
+
     <div class="container" style="padding-bottom:30px">
 
-        @foreach (var page in bigPages)
+        @foreach (var page in bPages)
         {
             <div class="item col-md-4 col-sm-6 col-xs-12 text-center os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.1s" style="margin-bottom:10px">
                 <div class="inner" style="background-color: white; min-height: 600px">
@@ -108,7 +111,7 @@
             </div>
                             }
 
-        @foreach (var page in smallPages)
+        @foreach (var page in sPages)
         {
             <div class="item col-md-2 col-sm-3 col-xs-6 text-center os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.1s" style="margin-bottom:10px">
                 <div class="inner" style="background-color:white; min-height: 290px">

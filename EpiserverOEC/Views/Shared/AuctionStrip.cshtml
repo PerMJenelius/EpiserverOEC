@@ -1,0 +1,48 @@
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+
+@model EpiserverOEC.Models.Blocks.AuctionStrip
+
+@{
+    var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
+
+    List<PageData> randomPages = new List<PageData>();
+
+    foreach (var child in children)
+    {
+        var pageRef = new PageReference(child.ID);
+        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+        var page = contentRepository.Get<PageData>(pageRef);
+
+        if (page.PageTypeName == "AuctionItemPage" && Convert.ToBoolean(page.GetPropertyValue("Large")) == true && page.GetPropertyValue("Image") != null)
+        {
+            randomPages.Add(page);
+        }
+    }
+
+    var pages = randomPages
+        .OrderByDescending(p => p.Created)
+        .Take(3);
+}
+
+<div class="container text-center" style="padding: 50px 0">
+    <h1>
+        @Html.PropertyFor(x => x.Heading)
+    </h1>
+    <div>
+        @Html.PropertyFor(x => x.BodyText)
+    </div>
+
+    @foreach (var page in pages)
+    {
+        <div class="item col-md-4 col-sm-6 col-xs-12 text-center">
+            <div class="inner" style="background-color: white; min-height: 600px">
+                Test
+            </div>
+        </div>
+    }
+
+</div>
+
+<div style="height:2px; background-color:white"></div>

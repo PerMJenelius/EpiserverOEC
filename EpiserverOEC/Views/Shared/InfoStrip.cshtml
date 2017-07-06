@@ -1,0 +1,12 @@
+﻿@model EpiserverOEC.Models.Blocks.InfoStrip
+
+<div class="container text-center" style="padding: 50px 0">
+    <h1>
+        @Html.PropertyFor(x => x.Heading)
+    </h1>
+    <div>
+        @Html.PropertyFor(x => x.BodyText)
+    </div>
+</div>
+
+<div style="height:2px; background-color:white"></div>
