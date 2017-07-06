@@ -1,6 +1,10 @@
 ﻿@using EPiServer;
 @using EPiServer.Core;
 @using EPiServer.ServiceLocation;
+@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+@using OEC_webb.Models;
 
 @model EpiserverOEC.Models.Blocks.AuctionStrip
 
@@ -37,8 +41,72 @@
     @foreach (var page in pages)
     {
         <div class="item col-md-4 col-sm-6 col-xs-12 text-center">
-            <div class="inner" style="background-color: white; min-height: 600px">
-                Test
+            <div class="inner" style="background-color: white; min-height: 500px">
+
+                <a href="@page.LinkURL">
+
+                    @if (page.GetPropertyValue<ContentReference>("Image") != null)
+                    {
+                        <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:300px" />
+                    }
+
+                    @if (page.GetPropertyValue("Heading") != null)
+                    {
+                        if (page.GetPropertyValue("Heading").Length <= 12)
+                        {
+                            <h2>@page.GetPropertyValue("Heading")</h2>
+                        }
+                        else if (page.GetPropertyValue("Heading").Length <= 18)
+                        {
+                            <h4>@page.GetPropertyValue("Heading")</h4>
+                        }
+                        else
+                        {
+                            <h6>@page.GetPropertyValue("Heading")</h6>
+                        }
+                    }
+
+                    @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
+                    {
+                        string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
+
+                        if (description.Length > 120)
+                        {
+                            description = description.Remove(120);
+
+                            while (!description.EndsWith(" "))
+                            {
+                                description = description.Remove(description.Length - 1, 1);
+                            }
+
+                            description = description.Remove(description.Length - 1, 1);
+                            description += "...";
+                        }
+
+                        <div class="text" style="padding:10px 20px; color:dimgray; height: 54px">@Html.Raw(description)</div>
+                    }
+
+                    @{
+                        int bid = 0;
+                        string bidString = "Startbud";
+
+                        var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
+
+                        if (bidHistory.HighestBid < page.GetPropertyValue<int>("StartingBid"))
+                        {
+                            bid = page.GetPropertyValue<int>("StartingBid");
+                        }
+                        else
+                        {
+                            bid = bidHistory.HighestBid;
+                            bidString = "Senaste bud";
+                        }
+
+                        <h4 style="color:firebrick">@bidString: @bid kr</h4>
+                    }
+
+                </a>
+
             </div>
         </div>
     }

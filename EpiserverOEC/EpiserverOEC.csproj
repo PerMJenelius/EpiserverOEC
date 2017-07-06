@@ -199,6 +199,7 @@
     <Compile Include="Business\Initialization\DisplayRegistryInitialization.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\Page\AuctionItemPageController.cs" />
+    <Compile Include="Controllers\Page\NewsItemPageController.cs" />
     <Compile Include="Controllers\Page\SponsorItemPageController.cs" />
     <Compile Include="Controllers\Page\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -213,6 +214,8 @@
     <Compile Include="Models\Blocks\AuctionStrip.cs" />
     <Compile Include="Models\Blocks\BigBanner.cs" />
     <Compile Include="Models\Blocks\InfoStrip.cs" />
+    <Compile Include="Models\Blocks\NewsPodSection.cs" />
+    <Compile Include="Models\Blocks\NewsStrip.cs" />
     <Compile Include="Models\Blocks\PageHead.cs" />
     <Compile Include="Models\Blocks\PageHeadSmall.cs" />
     <Compile Include="Models\Blocks\SignupBlock.cs" />
@@ -224,6 +227,7 @@
     <Compile Include="Models\ExtensionMethods.cs" />
     <Compile Include="Models\Imaging.cs" />
     <Compile Include="Models\Pages\AuctionItemPage.cs" />
+    <Compile Include="Models\Pages\NewsItemPage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
     <Compile Include="Models\Pages\SponsorItemPage.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
@@ -235,8 +239,6 @@
     <Folder Include="Controllers\Block\" />
     <Folder Include="Models\Properties\" />
     <Folder Include="Static\" />
-    <Folder Include="Views\AuctionPodSection\" />
-    <Folder Include="Views\BasePage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -289,6 +291,9 @@
     <Content Include="Views\Shared\SponsorStrip.cshtml" />
     <Content Include="Views\Shared\AuctionStrip.cshtml" />
     <Content Include="Views\Shared\InfoStrip.cshtml" />
+    <Content Include="Views\Shared\NewsStrip.cshtml" />
+    <Content Include="Views\Shared\NewsPodSection.cshtml" />
+    <Content Include="Views\NewsItemPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

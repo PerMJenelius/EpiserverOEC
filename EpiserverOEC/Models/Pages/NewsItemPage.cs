@@ -3,13 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using EPiServer.Core;
 using EPiServer.DataAbstraction;
 using EPiServer.DataAnnotations;
-using EPiServer.SpecializedProperties;
 using EPiServer.Web;
 
 namespace EpiserverOEC.Models.Pages
 {
-    [ContentType(DisplayName = "AuctionItemPage", GUID = "c47ab934-48e4-44e1-991c-0c0881fc7940", Description = "")]
-    public class AuctionItemPage : SitePageData
+    [ContentType(DisplayName = "NewsItemPage", GUID = "c4ccb8e1-9a46-4f28-b55f-2d7ac7b1a47e", Description = "A News Item")]
+    public class NewsItemPage : SitePageData
     {
         [CultureSpecific]
         [Display(
@@ -37,26 +36,10 @@ namespace EpiserverOEC.Models.Pages
 
         [CultureSpecific]
         [Display(
-            Name = "Starting Bid",
-            Description = "Add a starting bid.",
+            Name = "Category",
+            Description = "Add one category.",
             GroupName = SystemTabNames.Content,
-            Order = 4)]
-        public virtual int StartingBid { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Large Size",
-            Description = "Set to true if the item is to be displayed as Large on the Auction Main Page.",
-            GroupName = SystemTabNames.Content,
-            Order = 5)]
-        public virtual bool Large { get; set; }
-
-        public virtual string NewBidder { get; set; }
-
-        public virtual int BidAmount { get; set; }
-
-        public virtual int ItemId { get; set; }
-
-        public virtual int LowestBid { get; set; }
+            Order = 1)]
+        public virtual String ItemCategory { get; set; }
     }
 }

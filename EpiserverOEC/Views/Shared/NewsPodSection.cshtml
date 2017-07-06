@@ -1,0 +1,157 @@
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+
+@model EpiserverOEC.Models.Blocks.NewsPodSection
+
+@{
+    var pageRouteHelper = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<EPiServer.Web.Routing.IPageRouteHelper>();
+    var children = DataFactory.Instance.GetDescendents(pageRouteHelper.PageLink);
+
+    List<PageData> bigPages = new List<PageData>();
+
+    foreach (var child in children)
+    {
+        var pageRef = new PageReference(child.ID);
+        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+        var page = contentRepository.Get<PageData>(pageRef);
+        bigPages.Add(page);
+    }
+
+    var pages = bigPages.OrderByDescending(p => p.Created);
+
+    <div class="container">
+
+        <div class="item col-md-3 col-sm-4 col-xs-8">
+        </div>
+
+        <div class="item col-md-6 col-sm-9 col-xs-14">
+
+            @foreach (var page in pages)
+            {
+                <div style="margin-bottom:40px">
+                    <a href="@page.LinkURL">
+
+                        @if (page.GetPropertyValue<ContentReference>("Image") != null)
+                        {
+                            <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:320px" />
+                        }
+
+                        @if (page.GetPropertyValue("Heading") != null)
+                        {
+                            <h2>@page.GetPropertyValue("Heading")</h2>
+                        }
+
+                        @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
+                        {
+                            string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
+
+                            if (description.Length > 230)
+                            {
+                                description = description.Remove(230);
+
+                                while (!description.EndsWith(" "))
+                                {
+                                    description = description.Remove(description.Length - 1, 1);
+                                }
+
+                                description = description.Remove(description.Length - 1, 1);
+                                description += "...";
+                            }
+
+                            <div class="text" style="color:dimgray">@Html.Raw(description)</div>
+                        }
+                    </a>
+                </div>
+
+                <div style="background-color:white; color:dimgray; border:2px solid lightgray; padding:15px 25px; margin-bottom:50px">
+
+                    @{
+                        string date = page.Created.Year.ToString();
+                        date += '-';
+
+                        if (page.Created.Month < 10)
+                        {
+                            date += '0';
+                        }
+
+                        date += page.Created.Month;
+                        date += '-';
+
+                        if (page.Created.Day < 10)
+                        {
+                            date += '0';
+                        }
+
+                        date += page.Created.Day;
+                    }
+
+                    <p>
+                        @date
+                    </p>
+                    <p class="text-right" style="color:firebrick">
+                        @page.GetPropertyValue("ItemCategory")
+                    </p>
+
+                </div>
+                        }
+
+        </div>
+
+        @{
+            List<int> years = new List<int>();
+            List<string> cats = new List<string>();
+
+            foreach (var page in pages)
+            {
+                if (!years.Contains(page.Created.Year))
+                {
+                    years.Add(page.Created.Year);
+                }
+
+                if (!cats.Contains(page.GetPropertyValue("ItemCategory")))
+                {
+                    cats.Add(page.GetPropertyValue("ItemCategory"));
+                }
+            }
+        }
+
+        <div class="item col-md-3 col-sm-4 col-xs-8">
+
+            <div style="margin-bottom:30px">
+                <div style="background-color:firebrick; color:white; padding:5px 15px">
+                    <h4>
+                        Alla nyheter
+                    </h4>
+                </div>
+
+                @foreach (var year in years)
+                {
+                    <div style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                        <h5>
+                            @year
+                        </h5>
+                    </div>
+                }
+
+            </div>
+
+            <div style="background-color:firebrick; color:white; padding:5px 15px">
+                <h4>
+                    Kategorier
+                </h4>
+            </div>
+
+            @foreach (var cat in cats)
+            {
+                <div style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                    <h5>
+                        @cat
+                    </h5>
+                </div>
+            }
+
+        </div>
+
+    </div>
+}

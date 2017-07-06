@@ -42,9 +42,7 @@
 
                         @if (page.GetPropertyValue<ContentReference>("Image") != null)
                         {
-
                             <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:320px" />
-
                         }
 
                         @if (page.GetPropertyValue("Heading") != null)
