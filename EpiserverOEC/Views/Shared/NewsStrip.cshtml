@@ -31,27 +31,50 @@
     <h1>
         @Html.PropertyFor(x => x.Heading)
     </h1>
+
     <div>
         @Html.PropertyFor(x => x.BodyText)
     </div>
 
-
-
     @foreach (var page in pages)
     {
         <div class="item col-md-4 col-sm-6 col-xs-12 text-center">
-            <div class="inner" style="background-color: white; min-height: 500px">
+            <div class="inner" style="background-color:lightgray; min-height: 500px; padding:25px 0">
 
                 <a href="@page.LinkURL">
 
-                    @if (page.GetPropertyValue<ContentReference>("Image") != null)
-                    {
-                        <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; height:300px" />
-                    }
-
                     @if (page.GetPropertyValue("Heading") != null)
                     {
-                        <h2>@page.GetPropertyValue("Heading")</h2>
+                        <h3>@page.GetPropertyValue("Heading")</h3>
+                    }
+
+                    @{
+                        string date = page.Created.Year.ToString();
+                        date += '-';
+
+                        if (page.Created.Month < 10)
+                        {
+                            date += '0';
+                        }
+
+                        date += page.Created.Month;
+                        date += '-';
+
+                        if (page.Created.Day < 10)
+                        {
+                            date += '0';
+                        }
+
+                        date += page.Created.Day;
+                    }
+
+                    <p style="color:firebrick">
+                        @date
+                    </p>
+
+                    @if (page.GetPropertyValue<ContentReference>("Image") != null)
+                    {
+                        <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; height:280px" />
                     }
 
                     @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
