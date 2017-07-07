@@ -33,8 +33,6 @@ namespace EpiserverOEC.Business.Initialization
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            RegisterRoutes(routes);
-            routes.MapRoute("default", "{AuctionItemPage}/{PostBid}", new { action = "Index" });
         }
 
         public void Uninitialize(InitializationEngine context)

@@ -15,7 +15,7 @@
         var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
         var page = contentRepository.Get<PageData>(pageRef);
 
-        if (page.PageTypeName == "NewsItemPage" && page.GetPropertyValue("Image") != null)
+        if (page.PageTypeName == "NewsItemPage" && !page.IsDeleted)
         {
             randomPages.Add(page);
         }

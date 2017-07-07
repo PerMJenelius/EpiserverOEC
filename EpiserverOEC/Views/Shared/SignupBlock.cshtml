@@ -1,7 +1,7 @@
 ﻿@model EpiserverOEC.Models.Blocks.SignupBlock
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 
-<div class="container" style="padding:0 0 30px 225px">
+<div class="container" style="padding-left:225px">
     <!-- ROW -->
     <div class="row" style="padding-bottom:20px">
         <div class="col-md-3 col-xs-9">
@@ -96,20 +96,13 @@
             </div>
         </div>
     }
-    <div style="padding-right:244px">
+    <div style="padding-right:241px">
         <label for="Message" class="control-label">
             Meddelande
         </label>
         @Html.TextAreaFor(model => model.Message, new { rows = 5, @style = "width:100%" })
         <p><span class="requiredCF">*</span> Obligatoriska fält</p>
     </div>
-
-
-    <fieldset class="buttons">
-        <button class="btn" type="submit" style="border-radius:0; background-color:firebrick; color:white">
-            <span>Anmäl</span>
-        </button>
-    </fieldset>
 
     <div class="ajax-loading" id="placeholder" style="display:none">
         <div class="loading">

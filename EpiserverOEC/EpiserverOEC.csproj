@@ -200,11 +200,13 @@
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\Page\AuctionItemPageController.cs" />
     <Compile Include="Controllers\Page\NewsItemPageController.cs" />
+    <Compile Include="Controllers\Page\SignupPageController.cs" />
     <Compile Include="Controllers\Page\SponsorItemPageController.cs" />
     <Compile Include="Controllers\Page\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
     <Compile Include="Models\Bid.cs" />
     <Compile Include="Models\BidHistory.cs" />
     <Compile Include="Models\BidVM.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Models\Blocks\AuctionPod.cs" />
     <Compile Include="Models\Blocks\AuctionPodSection.cs" />
     <Compile Include="Models\Blocks\AuctionStrip.cs" />
+    <Compile Include="Models\Blocks\BidForm.cs" />
     <Compile Include="Models\Blocks\BigBanner.cs" />
     <Compile Include="Models\Blocks\InfoStrip.cs" />
     <Compile Include="Models\Blocks\NewsPodSection.cs" />
@@ -228,6 +231,7 @@
     <Compile Include="Models\Imaging.cs" />
     <Compile Include="Models\Pages\AuctionItemPage.cs" />
     <Compile Include="Models\Pages\NewsItemPage.cs" />
+    <Compile Include="Models\Pages\SignupPage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
     <Compile Include="Models\Pages\SponsorItemPage.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
@@ -294,6 +298,8 @@
     <Content Include="Views\Shared\NewsStrip.cshtml" />
     <Content Include="Views\Shared\NewsPodSection.cshtml" />
     <Content Include="Views\NewsItemPage\Index.cshtml" />
+    <Content Include="Views\Shared\BidForm.cshtml" />
+    <Content Include="Views\SignupPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

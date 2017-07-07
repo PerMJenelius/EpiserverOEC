@@ -15,7 +15,7 @@
         var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
         var page = contentRepository.Get<PageData>(pageRef);
 
-        if (page.PageTypeName == "SponsorItemPage" && page.GetPropertyValue("Image") != null)
+        if (page.PageTypeName == "SponsorItemPage" && !page.IsDeleted)
         {
             randomPages.Add(page);
         }

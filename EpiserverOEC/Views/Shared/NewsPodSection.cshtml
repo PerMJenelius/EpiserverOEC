@@ -1,9 +1,9 @@
 ﻿@using EPiServer;
 @using EPiServer.Core;
 @using EPiServer.ServiceLocation;
-@using EpiserverOEC.Models;
 
 @model EpiserverOEC.Models.Blocks.NewsPodSection
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 
 @{
     var pageRouteHelper = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<EPiServer.Web.Routing.IPageRouteHelper>();
@@ -24,78 +24,82 @@
     <div class="container">
 
         <div class="item col-md-3 col-sm-4 col-xs-8">
+            <h4 id="catInfo">
+            </h4>
         </div>
 
         <div class="item col-md-6 col-sm-9 col-xs-14">
 
             @foreach (var page in pages)
             {
-                <div style="margin-bottom:40px">
-                    <a href="@page.LinkURL">
+                <div class="article @page.GetPropertyValue("ItemCategory")">
+                    <div style="margin-bottom:40px">
+                        <a href="@page.LinkURL">
 
-                        @if (page.GetPropertyValue<ContentReference>("Image") != null)
-                        {
-                            <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:320px" />
-                        }
-
-                        @if (page.GetPropertyValue("Heading") != null)
-                        {
-                            <h2>@page.GetPropertyValue("Heading")</h2>
-                        }
-
-                        @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
-                        {
-                            string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
-
-                            if (description.Length > 230)
+                            @if (page.GetPropertyValue<ContentReference>("Image") != null)
                             {
-                                description = description.Remove(230);
-
-                                while (!description.EndsWith(" "))
-                                {
-                                    description = description.Remove(description.Length - 1, 1);
-                                }
-
-                                description = description.Remove(description.Length - 1, 1);
-                                description += "...";
+                                <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:320px" />
                             }
 
-                            <div class="text" style="color:dimgray">@Html.Raw(description)</div>
+                            @if (page.GetPropertyValue("Heading") != null)
+                            {
+                                <h2>@page.GetPropertyValue("Heading")</h2>
+                            }
+
+                            @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
+                            {
+                                string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
+
+                                if (description.Length > 230)
+                                {
+                                    description = description.Remove(230);
+
+                                    while (!description.EndsWith(" "))
+                                    {
+                                        description = description.Remove(description.Length - 1, 1);
+                                    }
+
+                                    description = description.Remove(description.Length - 1, 1);
+                                    description += "...";
+                                }
+
+                                <div class="text" style="color:dimgray">@Html.Raw(description)</div>
+                            }
+                        </a>
+                    </div>
+
+                    <div style="background-color:white; color:dimgray; border:2px solid lightgray; padding:15px 25px; margin-bottom:50px">
+
+                        @{
+                            string date = page.Created.Year.ToString();
+                            date += '-';
+
+                            if (page.Created.Month < 10)
+                            {
+                                date += '0';
+                            }
+
+                            date += page.Created.Month;
+                            date += '-';
+
+                            if (page.Created.Day < 10)
+                            {
+                                date += '0';
+                            }
+
+                            date += page.Created.Day;
                         }
-                    </a>
+
+                        <p>
+                            @date
+                        </p>
+                        <p class="cat @page.GetPropertyValue("ItemCategory") text-right" style="color:firebrick">
+                            @page.GetPropertyValue("ItemCategory")
+                        </p>
+
+                    </div>
                 </div>
-
-                <div style="background-color:white; color:dimgray; border:2px solid lightgray; padding:15px 25px; margin-bottom:50px">
-
-                    @{
-                        string date = page.Created.Year.ToString();
-                        date += '-';
-
-                        if (page.Created.Month < 10)
-                        {
-                            date += '0';
-                        }
-
-                        date += page.Created.Month;
-                        date += '-';
-
-                        if (page.Created.Day < 10)
-                        {
-                            date += '0';
-                        }
-
-                        date += page.Created.Day;
-                    }
-
-                    <p>
-                        @date
-                    </p>
-                    <p class="text-right" style="color:firebrick">
-                        @page.GetPropertyValue("ItemCategory")
-                    </p>
-
-                </div>
-                        }
+                            }
 
         </div>
 
@@ -120,7 +124,7 @@
         <div class="item col-md-3 col-sm-4 col-xs-8">
 
             <div style="margin-bottom:30px">
-                <div style="background-color:firebrick; color:white; padding:5px 15px">
+                <div class="headline" style="background-color:firebrick; color:white; padding:5px 15px">
                     <h4>
                         Alla nyheter
                     </h4>
@@ -128,7 +132,7 @@
 
                 @foreach (var year in years)
                 {
-                    <div style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                    <div class="cat year @year" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
                         <h5>
                             @year
                         </h5>
@@ -164,7 +168,7 @@
                             case 12: monthStr = "December"; break;
                         }
 
-                        <div style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                        <div class="cat month @month" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
                             <h5>
                                 - @monthStr
                             </h5>
@@ -174,15 +178,15 @@
 
             </div>
 
-            <div style="background-color:firebrick; color:white; padding:5px 15px">
-                <h4>
+            <div class="headline" style="background-color:firebrick; color:white; padding:5px 15px">
+                <h4 id="kategorier">
                     Kategorier
                 </h4>
             </div>
 
             @foreach (var cat in cats)
             {
-                <div style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                <div class="cat @cat" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
                     <h5>
                         @cat
                     </h5>
@@ -193,3 +197,36 @@
 
     </div>
 }
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.headline').click(function () {
+            $('.cat').animate({
+                opacity: '1',
+            });
+            $('.article').slideDown('slow');
+        });
+
+        $('.cat').click(function () {
+            $('.cat').animate({
+                opacity: '1',
+            });
+            $(this).animate({
+                opacity: '0.6',
+            });
+        });
+
+        $('.cat.Teknik').click(function () {
+            $('.article.Administration').slideUp('slow');
+            $('.article.Teknik').slideDown('slow');
+        });
+
+        $('.cat.Administration').click(function () {
+            $('.article.Teknik').slideUp('slow');
+            $('.article.Administration').slideDown('slow');
+        });
+    });
+
+</script>
