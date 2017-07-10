@@ -72,7 +72,7 @@
 
     <div class="text-center" style="background-color:white; padding-bottom:150px">
 
-        @for (int i = 1; i <= itemNr; i++)
+        @for (int i = 1; i < (itemNr-1); i++)
         {
             if (i == 1)
             {
@@ -106,8 +106,8 @@
                     $('.aItem').hide();
                     $('#1,#2,#3').animate({ width: 'toggle' });
                     first = 1;
-                    $('.prick.').css("background-color", "rgba(0,0,0,1)");
-                    $('.prick.' + first).css("background-color", "rgba(0,0,0,0.6)");
+                    $('.prick').css("background-color", "rgba(0,0,0,0.6)");
+                    $('.prick.' + first).css("background-color", "rgba(0,0,0,1)");
                 }
                 else {
                     $('#' + first).animate({ width: 'toggle' });
