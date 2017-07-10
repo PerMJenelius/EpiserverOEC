@@ -48,31 +48,9 @@
             .OrderByDescending(p => p.StartPublish.Value);
     }
 
-    <div style="background-color:white; padding:200px 2% 0 2%; width:100%; height:100%; display:table;">
-        <div style="display: table-row">
+    <div class="text-center" style="background-color:white; padding-top:200px">
 
-            @{
-                int itemNr = 0;
-
-                foreach (var page in pages)
-                {
-                    ++itemNr;
-                    var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
-
-                    <div class="aItem" id="@itemNr" style="width:32%; display:table-cell; padding:5px">
-                        <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:550px" />
-                        <h3 style="color:firebrick">Senaste bud:</h3>
-                        <p>antal bud: <strong>@bidHistory.NumberOfBids</strong> · Senaste budgivare: <strong>@bidHistory.LatestBidder</strong></p>
-                    </div>
-                }
-            }
-
-        </div>
-    </div>
-
-    <div class="text-center" style="background-color:white; padding-bottom:150px">
-
-        @for (int i = 1; i < (itemNr-1); i++)
+        @for (int i = 1; i < (pages.Count() - 1); i++)
         {
             if (i == 1)
             {
@@ -86,6 +64,37 @@
 
     </div>
 
+    <div style="background-color:white; padding:0 2% 150px 2%; width:100%; height:100%; display:table;">
+        <div style="display: table-row">
+
+            @{
+                int itemNr = 0;
+
+                foreach (var page in pages)
+                {
+                    ++itemNr;
+                    var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
+
+                    <div class="aItem" id="@itemNr" style="width:32%; display:table-cell; padding:5px">
+                        <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:600px" />
+
+                        @if (bidHistory.HighestBid < page.GetPropertyValue<Int32>("StartingBid"))
+                        {
+                            <h3 style="color:firebrick">Startbud: @page.GetPropertyValue("StartingBid") kr</h3>
+                        }
+                        else
+                        {
+                            <h3 style="color:firebrick">Senaste bud: @bidHistory.HighestBid kr</h3>
+                            <p>antal bud: <strong>@bidHistory.NumberOfBids</strong> · Senaste budgivare: <strong>@bidHistory.LatestBidder</strong></p>
+                        }
+
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -96,7 +105,7 @@
             $('.aItem').hide();
             $('#1,#2,#3').fadeIn();
 
-            $('#p1').click(function(){
+            $('#p1').click(function () {
                 alert('p1!');
             });
 
@@ -112,7 +121,7 @@
                 else {
                     $('#' + first).animate({ width: 'toggle' });
                     $('#' + (first + 3)).animate({ width: 'toggle' });
-                    $('.prick.' + (first+1)).css("background-color", "rgba(0,0,0,1)");
+                    $('.prick.' + (first + 1)).css("background-color", "rgba(0,0,0,1)");
                     $('.prick.' + (first)).css("background-color", "rgba(0,0,0,0.6)");
                     ++first;
                 }
