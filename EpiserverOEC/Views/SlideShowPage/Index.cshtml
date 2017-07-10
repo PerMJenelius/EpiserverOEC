@@ -1,0 +1,121 @@
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+@using OEC_webb.Models;
+
+@model EpiserverOEC.Models.Pages.SlideShowPage
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>One Evening Charity</title>
+</head>
+<body>
+
+    @{
+        var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
+
+        List<PageData> randomPages = new List<PageData>();
+
+        foreach (var child in children)
+        {
+            var pageRef = new PageReference(child.ID);
+            var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+            var page = contentRepository.Get<PageData>(pageRef);
+
+            if (page.PageTypeName == "AuctionItemPage" && Convert.ToBoolean(page.GetPropertyValue("Large")) == true && !page.IsDeleted)
+            {
+                randomPages.Add(page);
+            }
+        }
+
+        var pages = randomPages
+            .OrderByDescending(p => p.StartPublish.Value);
+
+        string anchorID = "id=\"pos_" + Model.ContentLink.ToString() + "\" ";
+    }
+
+    <h1>@anchorID</h1>
+
+    <div class="spc slideshow">
+        <div class="item image slider autoplay">
+
+            @foreach (var page in pages)
+            {
+                <div class="slide">
+                    <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" />
+                    <h1>@page.GetPropertyValue("Heading")</h1>
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+        var speed = 15000;
+        var count = $('.autoplay').children().length;
+        //var current = 3;
+
+        var slideCount = null;
+        var $status = $('.slidetext');
+        var $el = $('.autoplay');
+
+        $el.slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: speed,
+            arrows: false,
+            dots: true,
+            draggable: false,
+            pauseOnHover: false,
+            pauseOnFocus: false,
+        });
+
+        @*$el.on('beforeChange', function () {
+            ++current;
+            if (current > count) {
+                current = 1;
+            };
+            var idString = $('.' + current).children().attr('class');
+            var id = parseInt(idString);
+            $.ajax({
+                    url: '@Url.Action("UpdateBids", "BidInfoSurface")',
+                    type: 'GET',
+                    data: { 'id': id },
+                    //ifModified: true,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.NumberOfBids != 0) {
+                            $('#latestBidder.' + current).html(data.LatestBidder);
+                            $('#numberOfBids.' + current).html(data.NumberOfBids);
+                            $('#presentBid.' + current).html(data.HighestBid);
+                        }
+                    },
+                    error: function () {
+                        console.log('Fel vid ajaxanrop');
+                    }
+            });
+        });
+
+        window.setInterval(function () {
+            window.location.reload(1);
+        }, speed*(count+1));*@
+
+    });
+    </script>
+
+</body>
+</html>

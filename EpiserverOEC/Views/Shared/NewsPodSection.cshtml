@@ -19,20 +19,19 @@
         bigPages.Add(page);
     }
 
-    var pages = bigPages.OrderByDescending(p => p.Created);
+    var pages = bigPages.OrderByDescending(p => p.StartPublish.Value);
 
     <div class="container">
 
         <div class="item col-md-3 col-sm-4 col-xs-8">
-            <h4 id="catInfo">
-            </h4>
+            <h4 id="catInfo"></h4>
         </div>
 
         <div class="item col-md-6 col-sm-9 col-xs-14">
 
             @foreach (var page in pages)
             {
-                <div class="article @page.GetPropertyValue("ItemCategory")">
+                <div class="article @page.GetPropertyValue("ItemCategory") @page.StartPublish.Value.Year @page.StartPublish.Value.Month">
                     <div style="margin-bottom:40px">
                         <a href="@page.LinkURL">
 
@@ -71,23 +70,23 @@
                     <div style="background-color:white; color:dimgray; border:2px solid lightgray; padding:15px 25px; margin-bottom:50px">
 
                         @{
-                            string date = page.Created.Year.ToString();
+                            string date = page.StartPublish.Value.Year.ToString();
                             date += '-';
 
-                            if (page.Created.Month < 10)
+                            if (page.StartPublish.Value.Month < 10)
                             {
                                 date += '0';
                             }
 
-                            date += page.Created.Month;
+                            date += page.StartPublish.Value.Month;
                             date += '-';
 
-                            if (page.Created.Day < 10)
+                            if (page.StartPublish.Value.Day < 10)
                             {
                                 date += '0';
                             }
 
-                            date += page.Created.Day;
+                            date += page.StartPublish.Value.Day;
                         }
 
                         <p>
@@ -100,7 +99,6 @@
                     </div>
                 </div>
                             }
-
         </div>
 
         @{
@@ -109,9 +107,9 @@
 
             foreach (var page in pages)
             {
-                if (!years.Contains(page.Created.Year))
+                if (!years.Contains(page.StartPublish.Value.Year))
                 {
-                    years.Add(page.Created.Year);
+                    years.Add(page.StartPublish.Value.Year);
                 }
 
                 if (!cats.Contains(page.GetPropertyValue("ItemCategory")))
@@ -132,7 +130,7 @@
 
                 @foreach (var year in years)
                 {
-                    <div class="cat year @year" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                    <div class="year @year menuItem" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
                         <h5>
                             @year
                         </h5>
@@ -142,9 +140,9 @@
 
                     foreach (var page in pages)
                     {
-                        if (page.Created.Year == year && !months.Contains(page.Created.Month))
+                        if (page.StartPublish.Value.Year == year && !months.Contains(page.StartPublish.Value.Month))
                         {
-                            months.Add(page.Created.Month);
+                            months.Add(page.StartPublish.Value.Month);
                         }
                     }
 
@@ -168,7 +166,7 @@
                             case 12: monthStr = "December"; break;
                         }
 
-                        <div class="cat month @month" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                        <div class="month @month menuItem" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
                             <h5>
                                 - @monthStr
                             </h5>
@@ -186,7 +184,7 @@
 
             @foreach (var cat in cats)
             {
-                <div class="cat @cat" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                <div class="cat @cat menuItem" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
                     <h5>
                         @cat
                     </h5>
@@ -203,29 +201,63 @@
     $(document).ready(function () {
 
         $('.headline').click(function () {
-            $('.cat').animate({
+
+            $('.article').slideDown('slow');
+
+            $('.menuItem').animate({
                 opacity: '1',
             });
-            $('.article').slideDown('slow');
         });
 
         $('.cat').click(function () {
-            $('.cat').animate({
+
+            var input = $(this).attr('class').split(' ')[1];
+
+            $('.article').slideUp('slow');
+
+            $('.' + input).slideDown('slow');
+
+            $('.menuItem').animate({
                 opacity: '1',
             });
+
             $(this).animate({
                 opacity: '0.6',
             });
         });
 
-        $('.cat.Teknik').click(function () {
-            $('.article.Administration').slideUp('slow');
-            $('.article.Teknik').slideDown('slow');
+        $('.year').click(function () {
+
+            var input = $(this).attr('class').split(' ')[1];
+
+            $('.article').slideUp('slow');
+
+            $('.' + input).slideDown('slow');
+
+            $('.menuItem').animate({
+                opacity: '1',
+            });
+
+            $(this).animate({
+                opacity: '0.6',
+            });
         });
 
-        $('.cat.Administration').click(function () {
-            $('.article.Teknik').slideUp('slow');
-            $('.article.Administration').slideDown('slow');
+        $('.month').click(function () {
+
+            var input = $(this).attr('class').split(' ')[1];
+
+            $('.article').slideUp('slow');
+
+            $('.' + input).slideDown('slow');
+
+            $('.menuItem').animate({
+                opacity: '1',
+            });
+
+            $(this).animate({
+                opacity: '0.6',
+            });
         });
     });
 

@@ -201,6 +201,7 @@
     <Compile Include="Controllers\Page\AuctionItemPageController.cs" />
     <Compile Include="Controllers\Page\NewsItemPageController.cs" />
     <Compile Include="Controllers\Page\SignupPageController.cs" />
+    <Compile Include="Controllers\Page\SlideShowPageController.cs" />
     <Compile Include="Controllers\Page\SponsorItemPageController.cs" />
     <Compile Include="Controllers\Page\StartPageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -223,6 +224,7 @@
     <Compile Include="Models\Blocks\PageHeadSmall.cs" />
     <Compile Include="Models\Blocks\SignupBlock.cs" />
     <Compile Include="Models\Blocks\SignupLink.cs" />
+    <Compile Include="Models\Blocks\SlideShow.cs" />
     <Compile Include="Models\Blocks\SponsorsBig.cs" />
     <Compile Include="Models\Blocks\SponsorStrip.cs" />
     <Compile Include="Models\Blocks\TopImage.cs" />
@@ -233,6 +235,7 @@
     <Compile Include="Models\Pages\NewsItemPage.cs" />
     <Compile Include="Models\Pages\SignupPage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
+    <Compile Include="Models\Pages\SlideShowPage.cs" />
     <Compile Include="Models\Pages\SponsorItemPage.cs" />
     <Compile Include="Models\Pages\StartPage.cs" />
     <Compile Include="Models\SiteTypeManager.cs" />
@@ -286,7 +289,6 @@
     <Content Include="Views\Shared\PageHeadSmall.cshtml" />
     <Content Include="Views\Shared\SignupLink.cshtml" />
     <Content Include="Views\Shared\SignupBlock.cshtml" />
-    <Content Include="Views\Shared\AuctionItem.cshtml" />
     <Content Include="Views\Shared\AuctionPod.cshtml" />
     <Content Include="Views\Shared\AuctionPodSection.cshtml" />
     <Content Include="Views\AuctionItemPage\Index.cshtml" />
@@ -300,6 +302,8 @@
     <Content Include="Views\NewsItemPage\Index.cshtml" />
     <Content Include="Views\Shared\BidForm.cshtml" />
     <Content Include="Views\SignupPage\Index.cshtml" />
+    <Content Include="Views\Shared\SlideShow.cshtml" />
+    <Content Include="Views\SlideShowPage\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
