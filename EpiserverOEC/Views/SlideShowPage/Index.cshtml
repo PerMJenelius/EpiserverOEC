@@ -16,8 +16,14 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>One Evening Charity</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Hammersmith+One|Merriweather+Sans:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
 </head>
 <body>
 
@@ -32,7 +38,7 @@
             var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
             var page = contentRepository.Get<PageData>(pageRef);
 
-            if (page.PageTypeName == "AuctionItemPage" && Convert.ToBoolean(page.GetPropertyValue("Large")) == true && !page.IsDeleted)
+            if (page.PageTypeName == "AuctionItemPage" && !page.IsDeleted)
             {
                 randomPages.Add(page);
             }
@@ -40,81 +46,76 @@
 
         var pages = randomPages
             .OrderByDescending(p => p.StartPublish.Value);
-
-        string anchorID = "id=\"pos_" + Model.ContentLink.ToString() + "\" ";
     }
 
-    <h1>@anchorID</h1>
+    <div style="background-color:white; padding:200px 2% 0 2%; width:100%; height:100%; display:table;">
+        <div style="display: table-row">
 
-    <div class="spc slideshow">
-        <div class="item image slider autoplay">
+            @{
+                int itemNr = 0;
 
-            @foreach (var page in pages)
-            {
-                <div class="slide">
-                    <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" />
-                    <h1>@page.GetPropertyValue("Heading")</h1>
-                </div>
+                foreach (var page in pages)
+                {
+                    ++itemNr;
+                    var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
+
+                    <div class="aItem" id="@itemNr" style="width:32%; display:table-cell; padding:5px">
+                        <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:550px" />
+                        <h3 style="color:firebrick">Senaste bud:</h3>
+                        <p>antal bud: <strong>@bidHistory.NumberOfBids</strong> · Senaste budgivare: <strong>@bidHistory.LatestBidder</strong></p>
+                    </div>
+                }
             }
 
         </div>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <div class="text-center" style="background-color:white; padding-bottom:150px">
+
+        @for (int i = 1; i <= itemNr; i++)
+        {
+            if (i == 1)
+            {
+                <span id="p @i" style="height:10px; width:10px; border-radius:10px; background-color:rgba(0,0,0,1); color:rgba(0,0,0,0)">--</span>
+            }
+            else
+            {
+                <span id="p @i" style="height:10px; width:10px; border-radius:10px; background-color:rgba(0,0,0,0.6); color:rgba(0,0,0,0)">--</span>
+            }
+        }
+
+    </div>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
-        var speed = 15000;
-        var count = $('.autoplay').children().length;
-        //var current = 3;
 
-        var slideCount = null;
-        var $status = $('.slidetext');
-        var $el = $('.autoplay');
+            var aItems = $('.aItem').length;
+            var first = 1;
 
-        $el.slick({
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: speed,
-            arrows: false,
-            dots: true,
-            draggable: false,
-            pauseOnHover: false,
-            pauseOnFocus: false,
-        });
+            $('.aItem').hide();
+            $('#1,#2,#3').fadeIn();
 
-        @*$el.on('beforeChange', function () {
-            ++current;
-            if (current > count) {
-                current = 1;
-            };
-            var idString = $('.' + current).children().attr('class');
-            var id = parseInt(idString);
-            $.ajax({
-                    url: '@Url.Action("UpdateBids", "BidInfoSurface")',
-                    type: 'GET',
-                    data: { 'id': id },
-                    //ifModified: true,
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.NumberOfBids != 0) {
-                            $('#latestBidder.' + current).html(data.LatestBidder);
-                            $('#numberOfBids.' + current).html(data.NumberOfBids);
-                            $('#presentBid.' + current).html(data.HighestBid);
-                        }
-                    },
-                    error: function () {
-                        console.log('Fel vid ajaxanrop');
-                    }
+            $('#p1').click(function(){
+                alert('p1!');
             });
+
+            window.setInterval(function () {
+
+                if ((first + 3) > aItems) {
+                    $('.aItem').hide();
+                    $('#1,#2,#3').animate({ width: 'toggle' });
+                    first = 1;
+                }
+                else {
+                    $('#' + first).animate({ width: 'toggle' });
+                    $('#' + (first + 3)).animate({ width: 'toggle' });
+                    //$('#' + first).Css('background-color', 'yellow');
+                    ++first;
+                }
+            }, 5000);
         });
 
-        window.setInterval(function () {
-            window.location.reload(1);
-        }, speed*(count+1));*@
-
-    });
     </script>
 
 </body>
