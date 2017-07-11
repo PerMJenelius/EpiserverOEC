@@ -114,41 +114,43 @@
             <div class="item col-md-2 col-sm-3 col-xs-6 text-center os-animation" data-os-animation="zoomIn" data-os-animation-delay="0.1s" style="margin-bottom:10px">
                 <div class="inner" style="background-color:white; min-height: 290px">
 
-                    @if (page.GetPropertyValue<ContentReference>("Image") != null)
-                    {
-                        <a href="@page.LinkURL">
+                    <a href="@page.LinkURL">
+
+                        @if (page.GetPropertyValue<ContentReference>("Image") != null)
+                        {
                             <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:160px" />
-                        </a>
-                    }
-
-                    @if (page.GetPropertyValue("Heading") != null)
-                    {
-                        <h4 style="padding: 8px 0">@page.GetPropertyValue("Heading").ToUpper()</h4>
-                    }
-
-                    @{
-                        int bid = 0;
-                        string bidString = "Startbud";
-
-                        var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
-
-                        if (bidHistory.HighestBid < page.GetPropertyValue<int>("StartingBid"))
-                        {
-                            bid = page.GetPropertyValue<int>("StartingBid");
-                        }
-                        else
-                        {
-                            bid = bidHistory.HighestBid;
-                            bidString = "Senaste bud";
                         }
 
-                        <h4 style="color:firebrick">@bidString</h4>
-                        <h4 style="color:firebrick">@bid KR</h4>
-                    }
+                        @if (page.GetPropertyValue("Heading") != null)
+                        {
+                            <h4 style="padding: 8px 0">@page.GetPropertyValue("Heading").ToUpper()</h4>
+                        }
+
+                        @{
+                            int bid = 0;
+                            string bidString = "Startbud";
+
+                            var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
+
+                            if (bidHistory.HighestBid < page.GetPropertyValue<int>("StartingBid"))
+                            {
+                                bid = page.GetPropertyValue<int>("StartingBid");
+                            }
+                            else
+                            {
+                                bid = bidHistory.HighestBid;
+                                bidString = "Senaste bud";
+                            }
+
+                            <h4 style="color:firebrick">@bidString</h4>
+                            <h4 style="color:firebrick">@bid KR</h4>
+                        }
+
+                    </a>
 
                 </div>
             </div>
-                        }
+                            }
 
     </div>
 }

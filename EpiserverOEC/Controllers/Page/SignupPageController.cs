@@ -19,7 +19,8 @@ namespace EpiserverOEC.Controllers.Page
         [HttpPost]
         public ActionResult Submit(SignupPage currentPage, SignupInfo Signup)
         {
-            return RedirectToAction("Index");
+            return View(currentPage);
+            //return RedirectToAction("Index", "Tack för din anmälan. Ett bekräftelsemejl har skickats till den angivna adressen.");
         }
     }
 }

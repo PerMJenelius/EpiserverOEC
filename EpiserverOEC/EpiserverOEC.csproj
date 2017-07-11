@@ -217,6 +217,7 @@
     <Compile Include="Models\Blocks\AuctionStrip.cs" />
     <Compile Include="Models\Blocks\BidForm.cs" />
     <Compile Include="Models\Blocks\BigBanner.cs" />
+    <Compile Include="Models\Blocks\BreadCrumb.cs" />
     <Compile Include="Models\Blocks\InfoStrip.cs" />
     <Compile Include="Models\Blocks\NewsPodSection.cs" />
     <Compile Include="Models\Blocks\NewsStrip.cs" />
@@ -304,6 +305,7 @@
     <Content Include="Views\SignupPage\Index.cshtml" />
     <Content Include="Views\Shared\SlideShow.cshtml" />
     <Content Include="Views\SlideShowPage\Index.cshtml" />
+    <Content Include="Views\Shared\BreadCrumb.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

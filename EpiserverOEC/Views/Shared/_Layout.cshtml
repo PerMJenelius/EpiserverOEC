@@ -24,40 +24,46 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <div class="nav navbar-nav navbar-right" style="padding-top:5px">
+            <div class="nav navbar-nav navbar-right" style="padding-top:10px">
+                <h5>
 
-                @{
-                    var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
+                    @{
+                        var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
 
-                    List<PageData> rndPages = new List<PageData>();
+                        List<PageData> rndPages = new List<PageData>();
 
-                    foreach (var child in children)
-                    {
-                        var pageRef = new PageReference(child.ID);
-                        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
-                        var page = contentRepository.Get<PageData>(pageRef);
-
-                        if (page.PageTypeName == "StartPage" || page.PageTypeName == "SignupPage" && !page.IsDeleted)
+                        foreach (var child in children)
                         {
-                            rndPages.Add(page);
+                            var pageRef = new PageReference(child.ID);
+                            var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+                            var page = contentRepository.Get<PageData>(pageRef);
+
+                            if (page.PageTypeName == "StartPage" || page.PageTypeName == "SignupPage" && !page.IsDeleted)
+                            {
+                                rndPages.Add(page);
+                            }
+                        }
+
+                        var pages = rndPages
+                            .Where(p => p.VisibleInMenu)
+                            .OrderBy(p => p.StartPublish);
+
+                        foreach (var page in pages)
+                        {
+                            <a href="/en/@page.URLSegment.ToString()" class="topLink" style="color:white; padding:23px 10px">
+                                @page.Name
+                            </a>
                         }
                     }
 
-                    var pages = rndPages
-                        .OrderBy(p => p.StartPublish);
-
-                    foreach (var page in pages)
-                    {
-                        @Html.ActionLink(page.Name, "index", "en/"+page.Name, new { area = "" }, new { @class = "navbar-brand heading" })
-                    }
-                }
-
+                </h5>
             </div>
         </div>
     </div>
     <div>
         @RenderBody()
     </div>
+
     <footer>
         @{
             Html.RenderPartial("Footer");
@@ -70,6 +76,20 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+
+            $('.navbar').mouseenter(function () {
+                $('.navbar').css('background-color', 'rgba(0,0,0,1)');
+            });
+            $('.navbar').mouseleave(function () {
+                $('.navbar').css('background-color', 'rgba(0,0,0,0.7)');
+            });
+
+            $('.topLink').mouseenter(function () {
+                $(this).css('background-color', 'firebrick');
+            });
+            $('.topLink').mouseleave(function () {
+                $('.topLink').css('background-color', 'rgba(0,0,0,0)');
+            });
 
             $(window).scroll(function () {
 
