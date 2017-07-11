@@ -70,9 +70,9 @@
                     {
                         string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
 
-                        if (description.Length > 120)
+                        if (description.Length > 80)
                         {
-                            description = description.Remove(120);
+                            description = description.Remove(80);
 
                             while (!description.EndsWith(" "))
                             {
