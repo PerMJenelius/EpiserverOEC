@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -20,14 +24,35 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                @Html.ActionLink("Hem", "Index", "en/start", new { area = "" }, new { @class = "navbar-brand heading" })
-                @Html.ActionLink("Om OEC", "Index", "en/about", new { area = "" }, new { @class = "navbar-brand heading" })
-                @Html.ActionLink("Sponsorer", "Index", "en/sponsors", new { area = "" }, new { @class = "navbar-brand heading" })
-                @Html.ActionLink("Auktionen", "Index", "en/auction", new { area = "" }, new { @class = "navbar-brand heading" })
-                @Html.ActionLink("Anmälan", "Index", "en/signup", new { area = "" }, new { @class = "navbar-brand heading" })
-                @Html.ActionLink("Nyheter", "Index", "en/news", new { area = "" }, new { @class = "navbar-brand heading" })
-            </ul>
+            <div class="nav navbar-nav navbar-right" style="padding-top:5px">
+
+                @{
+                    var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
+
+                    List<PageData> rndPages = new List<PageData>();
+
+                    foreach (var child in children)
+                    {
+                        var pageRef = new PageReference(child.ID);
+                        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+                        var page = contentRepository.Get<PageData>(pageRef);
+
+                        if (page.PageTypeName == "StartPage" || page.PageTypeName == "SignupPage" && !page.IsDeleted)
+                        {
+                            rndPages.Add(page);
+                        }
+                    }
+
+                    var pages = rndPages
+                        .OrderBy(p => p.StartPublish);
+
+                    foreach (var page in pages)
+                    {
+                        @Html.ActionLink(page.Name, "index", "en/"+page.Name, new { area = "" }, new { @class = "navbar-brand heading" })
+                    }
+                }
+
+            </div>
         </div>
     </div>
     <div>
@@ -41,5 +66,25 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $(window).scroll(function () {
+
+                var height = $(window).scrollTop();
+
+                if (height > 60) {
+                    $('.navbar-fixed-top').fadeOut('slow');
+                }
+                else {
+                    $('.navbar-fixed-top').fadeIn('slow');
+                }
+            });
+        });
+
+    </script>
+
 </body>
 </html>
