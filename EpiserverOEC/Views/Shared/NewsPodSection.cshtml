@@ -166,7 +166,7 @@
                             case 12: monthStr = "December"; break;
                         }
 
-                        <div class="month @month menuItem" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink">
+                        <div class="month @month @year menuItem" style="background-color:indianred; color:white; padding:5px 15px; border-top:1px solid pink" hidden="hidden">
                             <h5>
                                 - @monthStr
                             </h5>
@@ -232,7 +232,11 @@
 
             $('.article').slideUp('slow');
 
-            $('.' + input).slideDown('slow');
+            $('.article.' + input).slideDown('slow');
+
+            $('.month').slideUp('slow');
+
+            $('.month.' + input).slideDown('slow');
 
             $('.menuItem').animate({
                 opacity: '1',
