@@ -58,5 +58,13 @@ namespace EpiserverOEC.Models.Pages
         public virtual int ItemId { get; set; }
 
         public virtual int LowestBid { get; set; }
+
+        [Display(
+            Name = "Main content",
+            Description = "Using the editor you can insert text, images or tables.",
+            GroupName = SystemTabNames.Content,
+            Order = 1)]
+        [CultureSpecific]
+        public virtual ContentArea MainContentArea { get; set; }
     }
 }
