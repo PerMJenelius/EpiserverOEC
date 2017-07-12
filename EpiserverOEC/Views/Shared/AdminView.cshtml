@@ -6,8 +6,6 @@
 @using EPiServer.ServiceLocation;
 @using OEC_webb.Models;
 
-@model EpiserverOEC.Models.Blocks.AdminView
-
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 @{
@@ -103,9 +101,8 @@
                         $('.' + id + '.' + amount).fadeOut(500);
                     },
                     error: function () {
-                        alert('Fel vid ajaxanrop');
-                        //console.log('Fel vid ajaxanrop');
-                }
+                        console.log('Fel vid ajaxanrop');
+                    }
             });
         });
     });

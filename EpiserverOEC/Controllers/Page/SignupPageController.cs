@@ -19,9 +19,9 @@ namespace EpiserverOEC.Controllers.Page
         [HttpPost]
         public ActionResult Submit(SignupPage currentPage, SignupInfo Signup)
         {
-            string message = "Tack för din anmälan " + Signup.Name + ". Ett bekräftelsemejl har skickats till " + Signup.Email + ".";
-            //return RedirectToAction("Index");
-            return JavaScript(message);
+            //Send emails to sender and receiver
+
+            return PartialView("SubmitSuccess");
         }
     }
 }

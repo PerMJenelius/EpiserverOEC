@@ -213,7 +213,6 @@
     <Compile Include="Models\BidHistory.cs" />
     <Compile Include="Models\BidVM.cs" />
     <Compile Include="Models\Blocks\AdminBlock.cs" />
-    <Compile Include="Models\Blocks\AdminView.cs" />
     <Compile Include="Models\Blocks\AuctionItem.cs" />
     <Compile Include="Models\Blocks\AuctionPod.cs" />
     <Compile Include="Models\Blocks\AuctionPodSection.cs" />
@@ -229,7 +228,6 @@
     <Compile Include="Models\Blocks\PageHeadSmall.cs" />
     <Compile Include="Models\Blocks\SignupBlock.cs" />
     <Compile Include="Models\Blocks\SignupLink.cs" />
-    <Compile Include="Models\Blocks\SlideShow.cs" />
     <Compile Include="Models\Blocks\SponsorsBig.cs" />
     <Compile Include="Models\Blocks\SponsorStrip.cs" />
     <Compile Include="Models\Blocks\TopImage.cs" />
@@ -308,13 +306,13 @@
     <Content Include="Views\NewsItemPage\Index.cshtml" />
     <Content Include="Views\Shared\BidForm.cshtml" />
     <Content Include="Views\SignupPage\Index.cshtml" />
-    <Content Include="Views\Shared\SlideShow.cshtml" />
     <Content Include="Views\SlideShowPage\Index.cshtml" />
     <Content Include="Views\Shared\BreadCrumb.cshtml" />
     <Content Include="Views\Shared\BidSquare.cshtml" />
     <Content Include="Views\Shared\AdminBlock.cshtml" />
     <Content Include="Views\AdminPage\Index.cshtml" />
     <Content Include="Views\Shared\AdminView.cshtml" />
+    <Content Include="Views\Shared\SubmitSuccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

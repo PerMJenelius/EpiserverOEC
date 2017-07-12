@@ -6,8 +6,6 @@
 @using EPiServer.ServiceLocation;
 @using OEC_webb.Models;
 
-@model EpiserverOEC.Models.Pages.SlideShowPage
-
 @{
     Layout = null;
 }
@@ -75,7 +73,7 @@
                     ++itemNr;
                     var bidHistory = SQLQuery.GetBidHistory(Convert.ToInt32(page.GetPropertyValue("PageLink")));
 
-                    <div class="aItem" id="@itemNr" style="width:32%; display:table-cell; padding:5px">
+                    <div class="aItem @Convert.ToInt32(page.GetPropertyValue("PageLink"))" id="@itemNr" style="width:32%; display:table-cell; padding:5px">
                         <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:600px" />
 
                         @if (bidHistory.HighestBid < page.GetPropertyValue<Int32>("StartingBid"))
@@ -84,8 +82,8 @@
                         }
                         else
                         {
-                            <h3 style="color:firebrick">Senaste bud: @bidHistory.HighestBid kr</h3>
-                            <p>antal bud: <strong>@bidHistory.NumberOfBids</strong> · Senaste budgivare: <strong>@bidHistory.LatestBidder</strong></p>
+                            <h3 style="color:firebrick">Senaste bud: <span class="dollar @itemNr">@bidHistory.HighestBid</span> kr</h3>
+                            <p>antal bud: <strong><span class="nrBids @itemNr">@bidHistory.NumberOfBids</span></strong> · Senaste budgivare: <strong><span class="bidder @itemNr">@bidHistory.LatestBidder</span></strong></p>
                         }
 
                     </div>
@@ -125,6 +123,24 @@
                     $('.prick.' + (first)).css("background-color", "rgba(0,0,0,0.6)");
                     ++first;
                 }
+
+                var item = (first)
+                var id = $('#' + item).attr('class').split(' ')[1];
+
+                $.ajax({
+                    url: '@Url.Action("UpdateBid", "SlideShowPage")',
+                    type: 'GET',
+                    data: { 'id': id },
+                    dataType: 'json',
+                    success: function (result) {
+                        $('.dollar.' + item).html(result.HighestBid);
+                        $('.nrBids.' + item).html(result.NumberOfBids);
+                        $('.bidder.' + item).html(result.LatestBidder);
+                    },
+                    error: function () {
+                        console.log('Fel vid ajaxanrop');
+                    }
+                });
             }, 5000);
         });
 
