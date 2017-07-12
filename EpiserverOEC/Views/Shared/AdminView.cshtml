@@ -1,0 +1,113 @@
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+@using OEC_webb.Models;
+
+@model EpiserverOEC.Models.Blocks.AdminView
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
+
+    List<PageData> randomPages = new List<PageData>();
+
+    foreach (var child in children)
+    {
+        var pageRef = new PageReference(child.ID);
+        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+        var page = contentRepository.Get<PageData>(pageRef);
+
+        if (page.PageTypeName == "AuctionItemPage" && !page.IsDeleted)
+        {
+            randomPages.Add(page);
+        }
+    }
+
+    var bids = SQLQuery.GetAllBids()
+        .OrderByDescending(b => b.BidAmount);
+}
+
+<div class="body-content">
+
+    <div class="text-center" style="margin-top:60px; padding:100px 0 50px 0">
+        <h1>Hemlig sida för hantering av bud</h1>
+        <p>Tryck på knappen efter respektive bud för att radera det från databasen.</p>
+    </div>
+
+    <div class="container">
+        @foreach (var page in randomPages)
+        {
+            var bidNr = 0;
+
+            <h4>
+                @page.GetPropertyValue("Heading")
+            </h4>
+
+            <table style="margin-bottom:30px; width:100%">
+
+                @foreach (var bid in bids)
+                {
+                    if (bid.ItemID == Convert.ToInt32(page.PageLink.ToString()))
+                    {
+                        <tr class="@bid.ItemID @bid.BidAmount">
+                            <td style="border:1px solid black; background-color:white; padding:10px; width:20%">
+                                @bid.BidTime.Year-@bid.BidTime.Month-@bid.BidTime.Day @bid.BidTime.Hour:@bid.BidTime.Minute:@bid.BidTime.Second
+                            </td>
+                            <td style="border:1px solid black; background-color:white; padding:10px; width:30%">
+                                @bid.BidderName
+                            </td>
+                            <td style="border:1px solid black; background-color:white; padding:10px; width:20%">
+                                @bid.BidAmount kr
+                            </td>
+                            <td style="border:1px solid black; background-color:white; padding:10px; width:10%">
+                                <input type="submit" class="btn" id="@bid.ItemID @bid.BidAmount" value="radera" style="width:100%" />
+                            </td>
+                        </tr>
+
+                        ++bidNr;
+                    }
+                }
+
+                @if (bidNr == 0)
+                {
+                    <tr>Inga bud</tr>
+                }
+
+            </table>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.btn').click(function () {
+
+            var input = this.id.split(' ');
+            var id = input[0];
+            var amount = input[1];
+
+            $.ajax({
+                url: '@Url.Action("DeleteBid", "AdminPage")',
+                    type: 'GET',
+                    data: { 'id': id, 'amount': amount },
+                    dataType: 'json',
+                    success: function (result) {
+                        $('.' + id + '.' + amount).fadeOut(500);
+                    },
+                    error: function () {
+                        alert('Fel vid ajaxanrop');
+                        //console.log('Fel vid ajaxanrop');
+                }
+            });
+        });
+    });
+
+</script>

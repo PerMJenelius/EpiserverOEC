@@ -198,6 +198,7 @@
   <ItemGroup>
     <Compile Include="Business\Initialization\DisplayRegistryInitialization.cs" />
     <Compile Include="Controllers\BasePageController.cs" />
+    <Compile Include="Controllers\Page\AdminPageController.cs" />
     <Compile Include="Controllers\Page\AuctionItemPageController.cs" />
     <Compile Include="Controllers\Page\NewsItemPageController.cs" />
     <Compile Include="Controllers\Page\SignupPageController.cs" />
@@ -211,6 +212,8 @@
     <Compile Include="Models\Bid.cs" />
     <Compile Include="Models\BidHistory.cs" />
     <Compile Include="Models\BidVM.cs" />
+    <Compile Include="Models\Blocks\AdminBlock.cs" />
+    <Compile Include="Models\Blocks\AdminView.cs" />
     <Compile Include="Models\Blocks\AuctionItem.cs" />
     <Compile Include="Models\Blocks\AuctionPod.cs" />
     <Compile Include="Models\Blocks\AuctionPodSection.cs" />
@@ -233,6 +236,7 @@
     <Compile Include="Models\CustomContactVM.cs" />
     <Compile Include="Models\ExtensionMethods.cs" />
     <Compile Include="Models\Imaging.cs" />
+    <Compile Include="Models\Pages\AdminPage.cs" />
     <Compile Include="Models\Pages\AuctionItemPage.cs" />
     <Compile Include="Models\Pages\NewsItemPage.cs" />
     <Compile Include="Models\Pages\SignupPage.cs" />
@@ -308,6 +312,9 @@
     <Content Include="Views\SlideShowPage\Index.cshtml" />
     <Content Include="Views\Shared\BreadCrumb.cshtml" />
     <Content Include="Views\Shared\BidSquare.cshtml" />
+    <Content Include="Views\Shared\AdminBlock.cshtml" />
+    <Content Include="Views\AdminPage\Index.cshtml" />
+    <Content Include="Views\Shared\AdminView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,8 @@
+﻿@model EpiserverOEC.Models.Pages.AdminPage
+
+@using (Html.BeginForm("Login", "AdminPage", FormMethod.Post))
+{
+    <div class="body-content">
+        @Html.PropertyFor(p => p.MainContentArea)
+    </div>
+}

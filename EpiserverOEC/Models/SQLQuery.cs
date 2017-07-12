@@ -27,7 +27,7 @@ namespace OEC_webb.Models
                     connection.Open();
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
-                    command.CommandText = $"select * from BidsPerItem";
+                    command.CommandText = $"select * from BidsPerItemEpi";
                     SqlDataReader dr = command.ExecuteReader();
 
                     while (dr.Read())
