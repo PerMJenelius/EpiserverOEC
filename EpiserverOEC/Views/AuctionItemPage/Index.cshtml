@@ -2,6 +2,8 @@
 
 @model EpiserverOEC.Models.Pages.AuctionItemPage
 
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
 <div class="body-content">
     <div class="container" style="margin-top:60px; padding:50px 0 30px 0">
         <div class="item col-md-6 col-sm-9 col-xs-18">
@@ -56,13 +58,13 @@
             }
 
             <h3 style="color:firebrick">
-                @bidString: @bid kr
+                @bidString: <span class="dollar" id="@id">@bid</span> kr
             </h3>
 
             @if (bidHistory.NumberOfBids > 0)
             {
                 <p>
-                    Antal bud: <strong>@bidHistory.NumberOfBids</strong> · Senaste budgivare: <strong>@bidHistory.LatestBidder</strong>
+                    Antal bud: <strong><span class="nrBids">@bidHistory.NumberOfBids</span></strong> · Senaste budgivare: <strong><span class="bidder">@bidHistory.LatestBidder</span></strong>
                 </p>
             }
 
@@ -86,3 +88,29 @@
 
 <div style="height:1px; background-color:darkgray"></div>
 
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var id = $('.dollar').attr('id');
+
+        window.setInterval(function () {
+
+            $.ajax({
+                url: '@Url.Action("UpdateBid", "AuctionItemPage")',
+                type: 'GET',
+                data: { 'id': id },
+                dataType: 'json',
+                success: function (result) {
+                    $('.dollar').html(result.HighestBid);
+                    $('.nrBids').html(result.NumberOfBids);
+                    $('.bidder').html(result.LatestBidder);
+                },
+                error: function () {
+                    console.log('Fel vid ajaxanrop');
+                }
+            });
+        }, 5000);
+    });
+
+</script>

@@ -1,6 +1,7 @@
 ﻿using EPiServer.Web.Mvc;
 using EpiserverOEC.Models.Blocks;
 using EpiserverOEC.Models.Pages;
+using Newtonsoft.Json;
 using OEC_webb.Models;
 using System;
 using System.Web.Mvc;
@@ -28,6 +29,14 @@ namespace EpiserverOEC.Controllers.Page
             string message = SQLQuery.AddBidToDB(bid);
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public string UpdateBid(int id)
+        {
+            var result = SQLQuery.GetBidHistory(id);
+
+            return JsonConvert.SerializeObject(result);
         }
     }
 }
