@@ -17,333 +17,89 @@ namespace EpiserverOEC.Models.Blocks
 
         [Ignore]
         public SignupInfo Signup { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name",
-            Description = "The first name",
-            GroupName = SystemTabNames.Content,
-            Order = 1)]
+        [Ignore]
         public virtual String Name { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name1",
-            Description = "The 2 name",
-            GroupName = SystemTabNames.Content,
-            Order = 2)]
+        [Ignore]
         public virtual String Name1 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name2",
-            Description = "The 3 name",
-            GroupName = SystemTabNames.Content,
-            Order = 3)]
+        [Ignore]
         public virtual String Name2 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name3",
-            Description = "The 4 name",
-            GroupName = SystemTabNames.Content,
-            Order = 4)]
+        [Ignore]
         public virtual String Name3 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name4",
-            Description = "The 5 name",
-            GroupName = SystemTabNames.Content,
-            Order = 5)]
+        [Ignore]
         public virtual String Name4 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name5",
-            Description = "The 6 name",
-            GroupName = SystemTabNames.Content,
-            Order = 6)]
+        [Ignore]
         public virtual String Name5 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name6",
-            Description = "The 7 name",
-            GroupName = SystemTabNames.Content,
-            Order = 7)]
+        [Ignore]
         public virtual String Name6 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name7",
-            Description = "The 8 name",
-            GroupName = SystemTabNames.Content,
-            Order = 8)]
+        [Ignore]
         public virtual String Name7 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name8",
-            Description = "The 9 name",
-            GroupName = SystemTabNames.Content,
-            Order = 9)]
+        [Ignore]
         public virtual String Name8 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Name9",
-            Description = "The 10 name",
-            GroupName = SystemTabNames.Content,
-            Order = 10)]
+        [Ignore]
         public virtual String Name9 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company",
-            Description = "The first company",
-            GroupName = SystemTabNames.Content,
-            Order = 11)]
+        [Ignore]
         public virtual String Company { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company1",
-            Description = "The 2 company",
-            GroupName = SystemTabNames.Content,
-            Order = 12)]
+        [Ignore]
         public virtual String Company1 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company2",
-            Description = "The 3 company",
-            GroupName = SystemTabNames.Content,
-            Order = 13)]
+        [Ignore]
         public virtual String Company2 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company3",
-            Description = "The 4 company",
-            GroupName = SystemTabNames.Content,
-            Order = 14)]
+        [Ignore]
         public virtual String Company3 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company4",
-            Description = "The 5 company",
-            GroupName = SystemTabNames.Content,
-            Order = 15)]
+        [Ignore]
         public virtual String Company4 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company5",
-            Description = "The 6 company",
-            GroupName = SystemTabNames.Content,
-            Order = 16)]
+        [Ignore]
         public virtual String Company5 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company6",
-            Description = "The 7 company",
-            GroupName = SystemTabNames.Content,
-            Order = 17)]
+        [Ignore]
         public virtual String Company6 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company7",
-            Description = "The 8 company",
-            GroupName = SystemTabNames.Content,
-            Order = 18)]
+        [Ignore]
         public virtual String Company7 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company8",
-            Description = "The 9 company",
-            GroupName = SystemTabNames.Content,
-            Order = 19)]
+        [Ignore]
         public virtual String Company8 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Company9",
-            Description = "The 10 company",
-            GroupName = SystemTabNames.Content,
-            Order = 20)]
+        [Ignore]
         public virtual String Company9 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email",
-            Description = "The 1 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
+        [Required(ErrorMessage = "The email address is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public virtual String Email { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email1",
-            Description = "The 2 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email1 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email2",
-            Description = "The 3 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email2 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email3",
-            Description = "The 4 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email3 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email4",
-            Description = "The 5 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email4 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email5",
-            Description = "The 6 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email5 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email6",
-            Description = "The 7 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email6 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email7",
-            Description = "The 8 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email7 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email8",
-            Description = "The 9 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email8 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Email9",
-            Description = "The 10 email address",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual String Email9 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive1",
-            Description = "If the 2 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive1 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive2",
-            Description = "If the 3 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive2 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive3",
-            Description = "If the 4 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive3 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive4",
-            Description = "If the 5 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive4 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive5",
-            Description = "If the 6 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive5 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive6",
-            Description = "If the 7 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive6 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive7",
-            Description = "If the 8 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive7 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive8",
-            Description = "If the 9 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive8 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "IsActive9",
-            Description = "If the 10 field is active or not",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual Boolean IsActive9 { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "Message",
-            Description = "Message",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual string Message { get; set; }
-
-        [CultureSpecific]
-        [Display(
-            Name = "CurrentNodeID",
-            Description = "CurrentNodeID",
-            GroupName = SystemTabNames.Content,
-            Order = 21)]
+        [Ignore]
         public virtual int CurrentNodeID { get; set; }
     }
 

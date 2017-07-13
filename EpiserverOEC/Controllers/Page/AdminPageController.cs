@@ -25,8 +25,11 @@ namespace EpiserverOEC.Controllers.Page
             {
                 return PartialView("AdminView");
             }
+            else
+            {
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
         }
 
         [HttpGet]

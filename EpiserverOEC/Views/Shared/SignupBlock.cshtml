@@ -1,116 +1,120 @@
 ﻿@model EpiserverOEC.Models.Blocks.SignupBlock
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 
-<div class="container" style="padding-left:225px; padding-bottom:50px">
-    <!-- ROW -->
-    <div class="row" style="padding-bottom:20px">
-        <div class="col-md-3 col-xs-9">
-            <label for="Name" class="control-label">
-                Namn<em class="req">*</em>
-            </label>
-            @Html.TextBoxFor(x => Model.Name, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" })
-            @Html.ValidationMessageFor(x => Model.Name, "")
-        </div>
-        <div class="col-md-3 col-xs-9">
-            <label for="Company" class="control-label">
-                Företag
-            </label>
-            @Html.TextBoxFor(x => Model.Company, new { @style = "width:100%; height:40px" })
-        </div>
-        <div class="col-md-3 col-xs-9">
-            <label for="Email" class="control-label">
-                Epost<em class="req">*</em>
-            </label>
-            @Html.TextBoxFor(x => Model.Email, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" })
-            @Html.ValidationMessageFor(x => Model.Email, "")
-        </div>
-        <div>
-            <input type="button" class="btn" id="addButton" value="+" style="height:36px; width:36px; margin-top:27px; border-radius:0; background-color:firebrick; color:white; font-weight:bolder" />
-        </div>
-    </div>
-    <!-- /ROW -->
-    @*Generate nine hidden fieldsets*@
-    @for (int i = 0; i < 9; i++)
-            {
-        <div id="@(i+1)" hidden="hidden" class="row" style="padding-bottom:10px">
+@using (Html.BeginForm("Submit", "StartPage", FormMethod.Post))
+{
+
+    <div class="container" style="padding-left:225px; padding-bottom:50px">
+        <!-- ROW -->
+        <div class="row" style="padding-bottom:20px">
             <div class="col-md-3 col-xs-9">
                 <label for="Name" class="control-label">
                     Namn<em class="req">*</em>
                 </label>
-
-                @switch (i)
-                {
-                    case 0: @Html.TextBoxFor(x => Model.Name1, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                    case 1: @Html.TextBoxFor(x => Model.Name2, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                    case 2: @Html.TextBoxFor(x => Model.Name3, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                    case 3: @Html.TextBoxFor(x => Model.Name4, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                    case 4: @Html.TextBoxFor(x => Model.Name5, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                    case 5: @Html.TextBoxFor(x => Model.Name6, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                    case 6: @Html.TextBoxFor(x => Model.Name7, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                    case 7: @Html.TextBoxFor(x => Model.Name8, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                    case 8: @Html.TextBoxFor(x => Model.Name9, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
-                }
-
+                @Html.TextBoxFor(x => Model.Name, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" })
+                @Html.ValidationMessageFor(x => Model.Name, "")
             </div>
             <div class="col-md-3 col-xs-9">
                 <label for="Company" class="control-label">
                     Företag
                 </label>
-
-                @switch (i)
-                {
-                    case 0: @Html.TextBoxFor(x => Model.Company1, new { @style = "width:100%; height:40px" }); break;
-                    case 1: @Html.TextBoxFor(x => Model.Company2, new { @style = "width:100%; height:40px" }); break;
-                    case 2: @Html.TextBoxFor(x => Model.Company3, new { @style = "width:100%; height:40px" }); break;
-                    case 3: @Html.TextBoxFor(x => Model.Company4, new { @style = "width:100%; height:40px" }); break;
-                    case 4: @Html.TextBoxFor(x => Model.Company5, new { @style = "width:100%; height:40px" }); break;
-                    case 5: @Html.TextBoxFor(x => Model.Company6, new { @style = "width:100%; height:40px" }); break;
-                    case 6: @Html.TextBoxFor(x => Model.Company7, new { @style = "width:100%; height:40px" }); break;
-                    case 7: @Html.TextBoxFor(x => Model.Company8, new { @style = "width:100%; height:40px" }); break;
-                    case 8: @Html.TextBoxFor(x => Model.Company9, new { @style = "width:100%; height:40px" }); break;
-                }
-
+                @Html.TextBoxFor(x => Model.Company, new { @style = "width:100%; height:40px" })
             </div>
-
             <div class="col-md-3 col-xs-9">
                 <label for="Email" class="control-label">
                     Epost<em class="req">*</em>
                 </label>
-
-                @switch (i)
-                {
-                    case 0: @Html.TextBoxFor(x => Model.Email1, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                    case 1: @Html.TextBoxFor(x => Model.Email2, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                    case 2: @Html.TextBoxFor(x => Model.Email3, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                    case 3: @Html.TextBoxFor(x => Model.Email4, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                    case 4: @Html.TextBoxFor(x => Model.Email5, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                    case 5: @Html.TextBoxFor(x => Model.Email6, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                    case 6: @Html.TextBoxFor(x => Model.Email7, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                    case 7: @Html.TextBoxFor(x => Model.Email8, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                    case 8: @Html.TextBoxFor(x => Model.Email9, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
-                }
-
+                @Html.TextBoxFor(x => Model.Email, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" })
+                @Html.ValidationMessageFor(x => Model.Email, "")
             </div>
             <div>
-                <input type="button" class="btn c1-bg c5-text minus" id="minus @(i+1)" value="-" style="height:36px; width:36px; margin-top:27px; border-radius:0; background-color:firebrick; color:white; font-weight:bolder" />
+                <input type="button" class="btn" id="addButton" value="+" style="height:36px; width:36px; margin-top:27px; border-radius:0; background-color:firebrick; color:white; font-weight:bolder" />
             </div>
         </div>
-    }
-    <div style="padding-right:241px">
-        <label for="Message" class="control-label">
-            Meddelande
-        </label>
-        @Html.TextAreaFor(model => model.Message, new { rows = 5, @style = "width:100%" })
-        <p><span class="requiredCF">*</span> Obligatoriska fält</p>
-    </div>
+        <!-- /ROW -->
+        @*Generate nine hidden fieldsets*@
+        @for (int i = 0; i < 9; i++)
+        {
+            <div id="@(i + 1)" hidden="hidden" class="row" style="padding-bottom:10px">
+                <div class="col-md-3 col-xs-9">
+                    <label for="Name" class="control-label">
+                        Namn<em class="req">*</em>
+                    </label>
 
-    <div class="ajax-loading" id="placeholder" style="display:none">
-        <div class="loading">
-            <span class="message">Ett meddelande har skickats bla bla</span>
+                    @switch (i)
+                    {
+                        case 0: @Html.TextBoxFor(x => Model.Name1, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                        case 1: @Html.TextBoxFor(x => Model.Name2, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                        case 2: @Html.TextBoxFor(x => Model.Name3, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                        case 3: @Html.TextBoxFor(x => Model.Name4, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                        case 4: @Html.TextBoxFor(x => Model.Name5, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                        case 5: @Html.TextBoxFor(x => Model.Name6, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                        case 6: @Html.TextBoxFor(x => Model.Name7, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                        case 7: @Html.TextBoxFor(x => Model.Name8, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                        case 8: @Html.TextBoxFor(x => Model.Name9, new { @placeholder = "Fullständigt namn", @style = "width:100%; height:40px" }); break;
+                    }
+
+                </div>
+                <div class="col-md-3 col-xs-9">
+                    <label for="Company" class="control-label">
+                        Företag
+                    </label>
+
+                    @switch (i)
+                    {
+                        case 0: @Html.TextBoxFor(x => Model.Company1, new { @style = "width:100%; height:40px" }); break;
+                        case 1: @Html.TextBoxFor(x => Model.Company2, new { @style = "width:100%; height:40px" }); break;
+                        case 2: @Html.TextBoxFor(x => Model.Company3, new { @style = "width:100%; height:40px" }); break;
+                        case 3: @Html.TextBoxFor(x => Model.Company4, new { @style = "width:100%; height:40px" }); break;
+                        case 4: @Html.TextBoxFor(x => Model.Company5, new { @style = "width:100%; height:40px" }); break;
+                        case 5: @Html.TextBoxFor(x => Model.Company6, new { @style = "width:100%; height:40px" }); break;
+                        case 6: @Html.TextBoxFor(x => Model.Company7, new { @style = "width:100%; height:40px" }); break;
+                        case 7: @Html.TextBoxFor(x => Model.Company8, new { @style = "width:100%; height:40px" }); break;
+                        case 8: @Html.TextBoxFor(x => Model.Company9, new { @style = "width:100%; height:40px" }); break;
+                    }
+
+                </div>
+
+                <div class="col-md-3 col-xs-9">
+                    <label for="Email" class="control-label">
+                        Epost<em class="req">*</em>
+                    </label>
+
+                    @switch (i)
+                    {
+                        case 0: @Html.TextBoxFor(x => Model.Email1, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                        case 1: @Html.TextBoxFor(x => Model.Email2, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                        case 2: @Html.TextBoxFor(x => Model.Email3, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                        case 3: @Html.TextBoxFor(x => Model.Email4, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                        case 4: @Html.TextBoxFor(x => Model.Email5, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                        case 5: @Html.TextBoxFor(x => Model.Email6, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                        case 6: @Html.TextBoxFor(x => Model.Email7, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                        case 7: @Html.TextBoxFor(x => Model.Email8, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                        case 8: @Html.TextBoxFor(x => Model.Email9, new { autocapitalize = "off", @style = "width:100%; height:40px", @placeholder = "exempel@domain.se" }); break;
+                    }
+
+                </div>
+                <div>
+                    <input type="button" class="btn c1-bg c5-text minus" id="minus @(i + 1)" value="-" style="height:36px; width:36px; margin-top:27px; border-radius:0; background-color:firebrick; color:white; font-weight:bolder" />
+                </div>
+            </div>
+        }
+        <div style="padding-right:241px">
+            <label for="Message" class="control-label">
+                Meddelande
+            </label>
+            @Html.TextAreaFor(model => model.Message, new { rows = 5, @style = "width:100%" })
+            <p><span class="requiredCF">*</span> Obligatoriska fält</p>
         </div>
+
+        <div class="ajax-loading" id="placeholder" style="display:none">
+            <div class="loading">
+                <span class="message">Ett meddelande har skickats bla bla</span>
+            </div>
+        </div>
+        <button class="btn" type="submit" style="border-radius:0; background-color:firebrick; color:white">Anmäl</button>
     </div>
-    <button class="btn" type="submit" style="border-radius:0; background-color:firebrick; color:white">Anmäl</button>
-</div>
+}
 
 <script type="text/javascript">
 

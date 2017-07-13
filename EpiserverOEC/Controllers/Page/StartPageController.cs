@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using EpiserverOEC.Models;
+using EpiserverOEC.Models.Blocks;
 
 namespace EpiserverOEC.Controllers
 {
@@ -14,6 +15,14 @@ namespace EpiserverOEC.Controllers
         public ActionResult Index(StartPage currentPage)
         {
             return View(currentPage);
+        }
+
+        [HttpPost]
+        public ActionResult Submit(StartPage currentPage, SignupInfo Signup)
+        {
+            //Send emails to sender and receiver
+
+            return PartialView("SubmitSuccess");
         }
 
         protected DisplayOptionEnum GetDisplayOptionTag()

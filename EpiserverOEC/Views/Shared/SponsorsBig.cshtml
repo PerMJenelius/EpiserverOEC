@@ -2,8 +2,6 @@
 @using EPiServer.Core;
 @using EPiServer.ServiceLocation;
 
-@model EpiserverOEC.Models.Blocks.SponsorsBig
-
 @{
     var pageRouteHelper = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<EPiServer.Web.Routing.IPageRouteHelper>();
     var children = DataFactory.Instance.GetDescendents(pageRouteHelper.PageLink);
@@ -18,6 +16,8 @@
         pages.Add(page);
     }
 }
+
+@model EpiserverOEC.Models.Blocks.SponsorsBig
 
 <div class="container" style="padding-bottom:30px">
 
