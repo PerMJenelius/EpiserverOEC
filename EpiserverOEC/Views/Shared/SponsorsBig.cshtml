@@ -24,7 +24,7 @@
     @foreach (var page in pages)
     {
         <div class="item col-md-6 col-sm-9 col-xs-18 text-center" style="height:250px; margin-bottom:30px">
-            @Html.Raw("<a href=\"" + "http://" + page.GetPropertyValue("Link") + "\" >")
+            <a href="http://@page.GetPropertyValue("Link")" target="_blank" >
                 <div class="inner" style="background-image:url(@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))); background-size: 100% 100%; min-height:250px; padding: 60px 30px">
                     <div style="background-color:rgba(255,255,255,0.8); margin: 0 30px">
                         <h2>
@@ -35,7 +35,7 @@
                         </p>
                     </div>
                 </div>
-            @Html.Raw("</a>")
+            </a>
         </div>
     }
 
