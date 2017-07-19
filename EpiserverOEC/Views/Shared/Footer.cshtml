@@ -1,25 +1,91 @@
-﻿<div class="container">
-    <div class="col-md-4 col-xs-12 text-center icons">
-        <a href="https://www.facebook.com/swedconn/" target="_blank">
-            <img src="~/Models/Media/fb-art.png" height="40" width="40" />
-        </a>
-        <a href="https://www.linkedin.com/company/swedish-connection-ab" target="_blank">
-            <img src="~/Models/Media/linkedin-512.png" height="40" width="40" />
-        </a>
-        <a href="https://play.spotify.com/user/sby73/playlist/4ikdS3LuGBPK7L9LgfDb1v?play=true&utm_source=open.spotify.com&utm_medium=open" target="_blank">
-            <img src="~/Models/Media/spotify.png" height="40" width="40" />
-        </a>
-    </div>
-    <div class="col-md-4 col-xs-12 text-center">
-        <h3>Swedish Connection</h3>
-        <div class="addresses">
-            <p><em>Storgatan 16 · 852 30 Sundsvall</em></p>
-            <p><em><strong>Org.nr:</strong> 556648-5677</em></p>
-            <a href="mailto:sales@connection.se" class="addresses"><em>sales@connection.se</em></a>
+﻿@using EPiServer;
+@using EPiServer.Core;
+@using EPiServer.ServiceLocation;
+
+@{
+    var children = DataFactory.Instance.GetDescendents(ContentReference.RootPage);
+
+    List<PageData> randomPages = new List<PageData>();
+
+    foreach (var child in children)
+    {
+        var pageRef = new PageReference(child.ID);
+        var contentRepository = ServiceLocator.Current.GetInstance<IContentRepository>();
+        var page = contentRepository.Get<PageData>(pageRef);
+
+        if (page.PageTypeName == "GlobalSettings" && !page.IsDeleted)
+        {
+            randomPages.Add(page);
+        }
+    }
+
+    var globalPage = randomPages
+        .SingleOrDefault();
+
+    var parentPage = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<EPiServer.Web.Routing.IPageRouteHelper>().Page;
+}
+
+@if (Convert.ToBoolean(@parentPage.GetPropertyValue("DisplayFooter")))
+{
+    <div class="container">
+        <div class="col-md-4 col-xs-12 text-center icons">
+
+            @if (@globalPage.GetPropertyValue("Facebook") != null)
+            {
+                <a href="https://@globalPage.GetPropertyValue("Facebook")/" target="_blank">
+                    <img src="~/Models/Media/fb-art.png" height="40" width="40" />
+                </a>
+            }
+
+            @if (@globalPage.GetPropertyValue("Linkedin") != null)
+            {
+                <a href="https://@globalPage.GetPropertyValue("Linkedin")/" target="_blank">
+                    <img src="~/Models/Media/linkedin-512.png" height="40" width="40" />
+                </a>
+            }
+
+            @if (@globalPage.GetPropertyValue("Spotify") != null)
+            {
+                <a href="https://@globalPage.GetPropertyValue("Spotify")/" target="_blank">
+                    <img src="~/Models/Media/spotify.png" height="40" width="40" />
+                </a>
+            }
+
+        </div>
+        <div class="col-md-4 col-xs-12 text-center">
+
+            @if (@globalPage.GetPropertyValue("CompanyName") != null)
+            {
+                <h3>@globalPage.GetPropertyValue("CompanyName")</h3>
+            }
+
+            <div class="addresses">
+
+                @if (@globalPage.GetPropertyValue("Address") != null)
+                {
+                    <p><em>@globalPage.GetPropertyValue("Address")</em></p>
+                }
+
+                @if (@globalPage.GetPropertyValue("OrgNr") != null)
+                {
+                    <p><em><strong>Org.nr: </strong>@globalPage.GetPropertyValue("OrgNr")</em></p>
+                }
+
+                @if (@globalPage.GetPropertyValue("Email") != null)
+                {
+                    <a href="mailto:@globalPage.GetPropertyValue("Email")" class="addresses"><em>@globalPage.GetPropertyValue("Email")</em></a>
+                }
+
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12 text-center">
+
+            @if (@globalPage.GetPropertyValue("Phone") != null)
+            {
+                <h3>Växel</h3>
+                <p class="addresses"><em>@globalPage.GetPropertyValue("Phone")</em></p>
+            }
+
         </div>
     </div>
-    <div class="col-md-4 col-xs-12 text-center">
-        <h3>Växel</h3>
-        <p class="addresses"><em>+46 (0)60 14 95 70</em></p>
-    </div>
-</div>
+}

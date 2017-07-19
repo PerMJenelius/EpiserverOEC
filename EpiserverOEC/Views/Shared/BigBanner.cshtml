@@ -4,13 +4,15 @@
 
 @model EpiserverOEC.Models.Blocks.BigBanner
 
-<div class="text-center" style="background-image: url(@Url.ContentUrl(Model.Image)); background-color:black; color:white; background-size: 100%; background-repeat: no-repeat; padding:14% 0 10% 0">
-    <div class="row">
-        <h1 style="margin-top:0px; padding: 5px 10px 0 10px; background-color:rgba(0,0,0,0.5); display:inline">
-            @Html.PropertyFor(x => x.Heading)
-        </h1>
+<div class="text-center" style="background-image: url(@Url.ContentUrl(Model.Image)); background-color:black; color:white; background-size: 100%; background-repeat: no-repeat; padding:13% 0 10% 0">
+    <div class="container">
+        <div style="margin:0 30%">
+            <h1 style="margin-top:0px; padding: 5px 10px 0 10px; background-color:rgba(0,0,0,0.5)">
+                @Html.PropertyFor(x => x.Heading)
+            </h1>
+        </div>
+        <form action="~/en/signup/">
+            <input type="submit" value="Till anmälan" class="btn awsBtn" />
+        </form>
     </div>
-    <form action="~/en/signup/">
-        <input type="submit" value="Till anmälan" class="btn awsBtn"/>
-    </form>
 </div>

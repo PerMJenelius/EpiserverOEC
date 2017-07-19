@@ -7,6 +7,7 @@
 
 @{
     var page = EPiServer.ServiceLocation.ServiceLocator.Current.GetInstance<EPiServer.Web.Routing.IPageRouteHelper>().Page;
+
     var idStr = page.PageLink.ToString();
     int id = Convert.ToInt32(idStr);
     BidHistory bidHistory = SQLQuery.GetBidHistory(id);

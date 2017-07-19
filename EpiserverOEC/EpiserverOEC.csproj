@@ -200,6 +200,7 @@
     <Compile Include="Controllers\BasePageController.cs" />
     <Compile Include="Controllers\Page\AdminPageController.cs" />
     <Compile Include="Controllers\Page\AuctionItemPageController.cs" />
+    <Compile Include="Controllers\Page\GlobalSettingsController.cs" />
     <Compile Include="Controllers\Page\NewsItemPageController.cs" />
     <Compile Include="Controllers\Page\SlideShowPageController.cs" />
     <Compile Include="Controllers\Page\SponsorItemPageController.cs" />
@@ -211,7 +212,7 @@
     <Compile Include="Models\Bid.cs" />
     <Compile Include="Models\BidHistory.cs" />
     <Compile Include="Models\BidVM.cs" />
-    <Compile Include="Models\Blocks\AdminBlock.cs" />
+    <Compile Include="Models\Blocks\AdminView.cs" />
     <Compile Include="Models\Blocks\AuctionPodSection.cs" />
     <Compile Include="Models\Blocks\AuctionStrip.cs" />
     <Compile Include="Models\Blocks\BidSquare.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Models\Imaging.cs" />
     <Compile Include="Models\Pages\AdminPage.cs" />
     <Compile Include="Models\Pages\AuctionItemPage.cs" />
+    <Compile Include="Models\Pages\GlobalSettings.cs" />
     <Compile Include="Models\Pages\NewsItemPage.cs" />
     <Compile Include="Models\Pages\SitePageData.cs" />
     <Compile Include="Models\Pages\SlideShowPage.cs" />
@@ -302,10 +304,10 @@
     <Content Include="Views\SlideShowPage\Index.cshtml" />
     <Content Include="Views\Shared\BreadCrumb.cshtml" />
     <Content Include="Views\Shared\BidSquare.cshtml" />
-    <Content Include="Views\Shared\AdminBlock.cshtml" />
     <Content Include="Views\AdminPage\Index.cshtml" />
     <Content Include="Views\Shared\AdminView.cshtml" />
     <Content Include="Views\Shared\SubmitSuccess.cshtml" />
+    <Content Include="Views\GlobalSettings\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

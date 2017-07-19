@@ -19,19 +19,6 @@ namespace EpiserverOEC.Controllers.Page
             return View(currentPage);
         }
 
-        public ActionResult Login(AdminPage currentPage, InlogInfo Inlog)
-        {
-            if (Inlog.Login == "Per" && Inlog.Password == "abcde12345")
-            {
-                return PartialView("AdminView");
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-
-        }
-
         [HttpGet]
         public string DeleteBid(int id, int amount)
         {

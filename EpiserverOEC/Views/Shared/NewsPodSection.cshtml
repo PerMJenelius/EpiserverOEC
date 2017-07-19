@@ -20,7 +20,8 @@
         bigPages.Add(page);
     }
 
-    var pages = bigPages.OrderByDescending(p => p.StartPublish.Value);
+    var pages = bigPages
+        .OrderByDescending(p => p.StartPublish.Value);
 
     <div class="container">
 
@@ -30,76 +31,106 @@
 
         <div class="item col-md-6 col-sm-9 col-xs-14">
 
+            @{
+                int pageCount = 0;
+            }
+
             @foreach (var page in pages)
             {
-                <div class="article @page.GetPropertyValue("ItemCategory") @page.StartPublish.Value.Year @page.StartPublish.Value.Month">
-                    <div style="margin-bottom:40px">
-                        <a href="@page.LinkURL">
+                ++pageCount;
 
-                            @if (page.GetPropertyValue<ContentReference>("Image") != null)
-                            {
-                                <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:320px" />
-                            }
+                string visibility = "";
 
-                            @if (page.GetPropertyValue("Heading") != null)
-                            {
-                                <h2>@page.GetPropertyValue("Heading")</h2>
-                            }
+                if (pageCount > 5)
+                {
+                    visibility = "display:none";
+                }
 
-                            @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
-                            {
-                                string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
+                    <div class="article @page.GetPropertyValue("ItemCategory") @page.StartPublish.Value.Year @page.StartPublish.Value.Month">
+                        <div style="margin-bottom:40px">
+                            <a href="@page.LinkURL">
 
-                                if (description.Length > 230)
+                                @if (page.GetPropertyValue<ContentReference>("Image") != null)
                                 {
-                                    description = description.Remove(230);
-
-                                    while (!description.EndsWith(" "))
-                                    {
-                                        description = description.Remove(description.Length - 1, 1);
-                                    }
-
-                                    description = description.Remove(description.Length - 1, 1);
-                                    description += "...";
+                                    <img src="@Url.ContentUrl(page.GetPropertyValue<ContentReference>("Image"))" style="width:100%; min-height:320px @visibility" />
                                 }
 
-                                <div class="text" style="color:dimgray">@Html.Raw(description)</div>
+                                @if (page.GetPropertyValue("Heading") != null)
+                                {
+                                    <h2>@page.GetPropertyValue("Heading")</h2>
+                                }
+
+                                @if (page.GetPropertyValue<XhtmlString>("BodyText") != null)
+                                {
+                                    string description = page.GetPropertyValue<XhtmlString>("BodyText").ToString();
+
+                                    if (description.Length > 230)
+                                    {
+                                        description = description.Remove(230);
+
+                                        while (!description.EndsWith(" "))
+                                        {
+                                            description = description.Remove(description.Length - 1, 1);
+                                        }
+
+                                        description = description.Remove(description.Length - 1, 1);
+                                        description += "...";
+                                    }
+
+                                    <div class="text" style="color:dimgray">@Html.Raw(description)</div>
+                                }
+                            </a>
+                        </div>
+
+                        <div style="background-color:white; color:dimgray; border:2px solid lightgray; padding:15px 25px; margin-bottom:50px">
+
+                            @{
+                                string date = page.StartPublish.Value.Year.ToString();
+                                date += '-';
+
+                                if (page.StartPublish.Value.Month < 10)
+                                {
+                                    date += '0';
+                                }
+
+                                date += page.StartPublish.Value.Month;
+                                date += '-';
+
+                                if (page.StartPublish.Value.Day < 10)
+                                {
+                                    date += '0';
+                                }
+
+                                date += page.StartPublish.Value.Day;
                             }
-                        </a>
+
+                            <p>
+                                @date
+                            </p>
+                            <p class="cat @page.GetPropertyValue("ItemCategory") text-right" style="color:firebrick">
+                                @page.GetPropertyValue("ItemCategory")
+                            </p>
+
+                        </div>
                     </div>
+                                }
 
-                    <div style="background-color:white; color:dimgray; border:2px solid lightgray; padding:15px 25px; margin-bottom:50px">
+            @if (pageCount > 5)
+            {
+            <div style="margin:10px 0 50px 0; font-weight:bolder">
 
-                        @{
-                            string date = page.StartPublish.Value.Year.ToString();
-                            date += '-';
-
-                            if (page.StartPublish.Value.Month < 10)
-                            {
-                                date += '0';
-                            }
-
-                            date += page.StartPublish.Value.Month;
-                            date += '-';
-
-                            if (page.StartPublish.Value.Day < 10)
-                            {
-                                date += '0';
-                            }
-
-                            date += page.StartPublish.Value.Day;
-                        }
-
-                        <p>
-                            @date
-                        </p>
-                        <p class="cat @page.GetPropertyValue("ItemCategory") text-right" style="color:firebrick">
-                            @page.GetPropertyValue("ItemCategory")
-                        </p>
-
-                    </div>
+                <div style="background-color:black; color:white; padding:13px 22px; height:50px; width:50px; float:left; margin:10px 0 70px 0">
+                    1
                 </div>
-                            }
+                <div style="background-color:white; color:dimgray; border:2px solid lightgray; padding:13px 19px; height:50px; width:50px; float:left; margin:10px 0 70px 0">
+                    2
+                </div>
+                <div style="background-color:white; color:dimgray; border:2px solid lightgray; padding:13px 20px; height:50px; width:50px; float:right; margin:10px 0 70px 0">
+                    >
+                </div>
+            </div>
+            }
+
         </div>
 
         @{
